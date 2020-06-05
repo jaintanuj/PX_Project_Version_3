@@ -1,0 +1,54 @@
+﻿@page
+@model PX_Project_Version_3.Pages.ConfirmVotingModel
+
+@{
+    ViewData["Title"] = "ConfirmVoting";
+}
+
+<h1>Vote / Unvote page</h1>
+
+<h3>@Model.Message</h3>
+<div>
+    <h4>Vote</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.loginUser.UserName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.loginUser.UserName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.selectedTeam.TeamName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.selectedTeam.TeamName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EventCode)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EventCode)
+        </dd>
+    </dl>
+
+   @foreach (var vote in Model.userVotes)
+    {
+        //WE are looking if user has voted for the team or not
+        if (vote.TeamID.Equals(Model.selectedTeam.TeamId))
+        {
+            //This would mean that the user has already voted for this team
+            Model.Message = "Are you sure you wish to unovte?";
+            Model.button = "Unvote";
+            break;
+        }
+            Model.Message = "Are you sure you want to vote for this tema";
+            Model.button = "Vote";
+    }
+
+    <form method="post">
+        <input type="hidden" asp-for="@Model.selectedTeam.TeamId" />
+        <input type="submit" value="@Model.button" class="btn btn-primary" />
+        <a asp-page="./Voting">Back to Voting</a>
+    </form>
+</div>

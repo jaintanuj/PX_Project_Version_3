@@ -1,0 +1,54 @@
+﻿@page
+@model PX_Project_Version_3.Pages.Votes.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Vote</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Vote.UserID" class="control-label"></label>
+                <input asp-for="Vote.UserID" class="form-control" />
+                <span asp-validation-for="Vote.UserID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Vote.TeamID" class="control-label"></label>
+                <input asp-for="Vote.TeamID" class="form-control" />
+                <span asp-validation-for="Vote.TeamID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Vote.UserName" class="control-label"></label>
+                <input asp-for="Vote.UserName" class="form-control" />
+                <span asp-validation-for="Vote.UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Vote.TeamName" class="control-label"></label>
+                <input asp-for="Vote.TeamName" class="form-control" />
+                <span asp-validation-for="Vote.TeamName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Vote.EventID" class="control-label"></label>
+                <input asp-for="Vote.EventID" class="form-control" />
+                <span asp-validation-for="Vote.EventID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

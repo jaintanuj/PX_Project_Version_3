@@ -1,0 +1,72 @@
+﻿@page
+@model PX_Project_Version_3.Pages.AppConditions.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AppCondition[0].AdminID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AppCondition[0].AdminName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AppCondition[0].EventID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AppCondition[0].ThemeID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AppCondition[0].VotesAllowed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AppCondition[0].MemberPerTeam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AppCondition[0].AppStatus)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.AppCondition) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdminID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdminName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThemeID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VotesAllowed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MemberPerTeam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AppStatus)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.AppConditionId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.AppConditionId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.AppConditionId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

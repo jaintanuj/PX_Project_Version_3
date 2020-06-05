@@ -1,0 +1,47 @@
+﻿@page
+@model PX_Project_Version_3.Pages.TeamDetailsEditModel
+
+@{
+    ViewData["Title"] = "TeamDetailsEdit";
+}
+
+<h1>TeamDetailsEdit</h1>
+
+<h4>Team</h4>
+<hr />
+<h4>@Model.Message</h4>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Team.TeamId" />
+            <div class="form-group">
+                <label asp-for="Team.TeamName" class="control-label"></label>
+                <input asp-for="Team.TeamName" class="form-control" />
+                <span asp-validation-for="Team.TeamName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Team.ProjectName" class="control-label"></label>
+                <input asp-for="Team.ProjectName" class="form-control" />
+                <span asp-validation-for="Team.ProjectName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Team.Idea" class="control-label"></label>
+                <input asp-for="Team.Idea" class="form-control" />
+                <span asp-validation-for="Team.Idea" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Update" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./MyTeam">My Team</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

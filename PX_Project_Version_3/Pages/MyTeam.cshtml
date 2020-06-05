@@ -1,0 +1,130 @@
+﻿@page
+@model PX_Project_Version_3.Pages.MyTeamModel
+@using Microsoft.AspNetCore.Http
+
+@{
+    ViewData["Title"] = "MyTeam";
+}
+
+<h1>@HttpContext.Session.GetString("username");</h1>
+
+<div>
+    <h4>Team</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Team.TeamName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Team.TeamName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Team.ProjectName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Team.ProjectName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Team.Idea)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Team.Idea)
+        </dd>
+        @if (Model.isLeader)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Team.JoinCode)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Team.JoinCode)
+            </dd>
+        }
+    </dl>
+</div>
+
+@if (Model.isLeader)
+{
+    <div>
+        <p><a asp-page="./TeamDetailsEdit">Edit Team Details</a></p>
+        <p><a asp-page="./DeleteTeam">Delete My Team</a></p>
+    </div>
+}
+
+<div>
+    <h4>Leader</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Leader.UserName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Leader.UserName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Leader.FullName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Leader.FullName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Leader.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Leader.Email)
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <h4>Team Members</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Members[0].UserName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Members[0].Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Members[0].FullName)
+                </th>
+                @if (Model.isLeader)
+                {
+                    <th>Remove Members</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Members)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FullName)
+                    </td>
+                    @if (Model.isLeader)
+                    {
+                        <td>
+                            <a asp-page="./RemoveMember" asp-route-id="@item.MemberId">Remove</a>
+                        </td>
+                    }
+
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+</div>
+
+@if (!Model.isLeader)
+{
+    <div>
+        <a asp-page="./LeaveTeam">Leave Team</a>
+    </div>
+}

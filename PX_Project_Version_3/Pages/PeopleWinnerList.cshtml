@@ -1,0 +1,61 @@
+﻿@page
+@model PX_Project_Version_3.Pages.PeopleWinnerListModel
+
+@{
+    ViewData["Title"] = "PeopleWinnerList";
+}
+
+<h1>PeopleWinnerList</h1>
+<br/>
+
+<div>
+    <form method="post">
+        <select name="eventid" asp-items="Model.eventList"></select>
+        <input type="submit" class="btn btn-primary" value="Filter Results"> 
+    </form>
+</div>
+<br/>
+<h3>@Model.Message</h3>
+<br/>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PeopleWinner[0].UserID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PeopleWinner[0].TeamID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PeopleWinner[0].TeamName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PeopleWinner[0].EventID)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.PeopleWinner) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TeamID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TeamName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventID)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.PeopleWinnerId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.PeopleWinnerId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.PeopleWinnerId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

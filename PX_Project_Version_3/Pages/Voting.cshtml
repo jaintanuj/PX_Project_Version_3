@@ -1,0 +1,85 @@
+﻿@page
+@model PX_Project_Version_3.Pages.VotingModel
+
+@{
+    ViewData["Title"] = "Votes";
+}
+
+<h1>Votes</h1>
+
+<p>
+    @Model.Message
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Team[0].TeamName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Team[0].ProjectName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Team[0].Idea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EventCode)
+            </th>
+            <th>Vote/Unvote</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Team) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TeamName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Idea)
+            </td>
+                @foreach (var eve in Model.AllEvents)
+                {
+                    if (eve.EventId.Equals(item.EventID))
+                    {
+                        Model.EventCode = eve.EventCode;
+                        break;
+                    }
+                }
+
+                @foreach (var user in Model.AllUsers)
+                {
+                    if (user.UserId.Equals(item.UserID))
+                    {
+                        Model.Email = user.Email;
+                        break;
+                    }
+                }
+                
+                @foreach (var vote in Model.UserVotes)
+                {
+                    if (vote.TeamID.Equals(item.TeamId))
+                    {
+                        Model.VoteStatus = "Unvote";
+                        break;
+                    }
+                    Model.VoteStatus = "Vote";
+                }
+            <td>
+                @Html.DisplayFor(model => model.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.EventCode)
+            </td>
+            <td>
+                <a asp-page="./ConfirmVoting" asp-route-id="@item.TeamId">@Model.VoteStatus</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

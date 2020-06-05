@@ -1,0 +1,50 @@
+﻿@page
+@model PX_Project_Version_3.Pages.JudgeWinners.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>JudgeWinner</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="JudgeWinner.JudgeWinnerId" />
+            <div class="form-group">
+                <label asp-for="JudgeWinner.UserID" class="control-label"></label>
+                <input asp-for="JudgeWinner.UserID" class="form-control" />
+                <span asp-validation-for="JudgeWinner.UserID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="JudgeWinner.TeamID" class="control-label"></label>
+                <input asp-for="JudgeWinner.TeamID" class="form-control" />
+                <span asp-validation-for="JudgeWinner.TeamID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="JudgeWinner.TeamName" class="control-label"></label>
+                <input asp-for="JudgeWinner.TeamName" class="form-control" />
+                <span asp-validation-for="JudgeWinner.TeamName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="JudgeWinner.EventID" class="control-label"></label>
+                <input asp-for="JudgeWinner.EventID" class="form-control" />
+                <span asp-validation-for="JudgeWinner.EventID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

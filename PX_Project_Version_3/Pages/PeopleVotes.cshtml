@@ -1,0 +1,63 @@
+﻿@page
+@model PX_Project_Version_3.Pages.PeopleVotesModel
+
+@{
+    ViewData["Title"] = "PeopleVotes";
+}
+
+<h1>PeopleVotes</h1>
+
+
+    <h3>@Model.Message</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Team[0].TeamName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Team[0].ProjectName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Team[0].Idea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Team[0].UserID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Team[0].EventID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Team[0].JoinCode)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Team) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TeamName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Idea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserID)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@if (Model.isAdmin)
+{
+    <div>
+        <form method="post">
+            <input type="submit" value="Save Winner">
+            </form>
+     </div>
+}

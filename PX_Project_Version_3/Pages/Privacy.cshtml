@@ -1,0 +1,61 @@
+﻿@page
+@model PrivacyModel
+@using Microsoft.AspNetCore.Http
+@{
+    ViewData["Title"] = "Privacy Policy";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Welcome @HttpContext.Session.GetString("username")</p>
+
+<br/>
+<p>All the available links based on your access rights:</p>
+<ui class="list-unstyled">
+
+    <li><a asp-page="./AllTeams">All Teams</a></li>
+    <li><a asp-page="./AllThemes">All Themes</a></li>
+    <li>Event Winners</li>
+    <ul>
+        <li><a asp-page="./JudgeWinnerList">Judges Winners</a></li>
+        <li><a asp-page="./PeopleWinnerList">People Winners</a></li>
+    </ul>
+    <li><a asp-page="AllEvents">All Events</a></li>
+    <li><a asp-page="Voting">Vote Team</a></li>
+    @if (Model.isUser)
+    {
+        <li>Team</li>
+        <ul>
+         
+            <li><a asp-page="./MyTeam">MyTeam</a></li>
+            <li><a asp-page="">Team Presentation</a></li>
+        </ul>
+        <!--Need to work on a way to seperate the two based on the requirements-->
+        <ul>
+            <li><a asp-page="./CreateTeam">Create Team</a></li>
+            <li><a asp-page="./JoinTeam">Join Team</a></li>
+       
+        </ul>
+
+        <!--This will be used to see the total number of votes for the event only-->
+        <li><a asp-page="./PeopleVotes">Total Votes</a></li>
+    }
+
+    @if (Model.isJudge)
+    {
+        <li>Vote Team</li>
+
+    }
+
+    @if (Model.isAdmin)
+    {
+        //This will be used to start new event at the end of the event
+        <li><a asp-page="NewEvent">Start New Event</a></li>
+        //This will be used to update the appCondition table not new as there will always be one unit
+        <li><a asp-page="UpdateTheme">Update Event Theme</a></li>
+        //Add new themes as only admin can create new themes
+        <li><a asp-page="">Judges Selection</a></li>
+
+    }
+
+</ui>
+

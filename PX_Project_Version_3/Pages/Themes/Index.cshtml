@@ -1,0 +1,60 @@
+﻿@page
+@model PX_Project_Version_3.Pages.Themes.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Theme[0].ThemeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Theme[0].ThemeType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Theme[0].EventID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Theme[0].EventName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Theme[0].EventCode)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Theme) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThemeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThemeType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventCode)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ThemeId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ThemeId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ThemeId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
