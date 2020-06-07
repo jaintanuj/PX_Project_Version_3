@@ -36,15 +36,14 @@ namespace PX_Project_Version_3.Pages
             {
                 return RedirectToPage("Index");
             }
-            else
-            {
+           
                 //we make sure that user didn't meddle with the cookies
                 User theuser = _context.User.FirstOrDefault(u => u.UserName.Equals(username));
                 if (theuser == null)
                 {
                     return RedirectToPage("Index");
                 }
-            }
+      
 
             //Now before we move forward we have to perform various checks 
             //Such as for admin
@@ -84,12 +83,11 @@ namespace PX_Project_Version_3.Pages
             //We need to check if they have a team or not
 
             User user = _context.User.FirstOrDefault(u => u.UserName.Equals(username));
-           
+
             if (isUser)
             {
-                hasTeam = false;
                 Team team = _context.Team.FirstOrDefault(t => t.UserID.Equals(user.UserId) && t.EventID.Equals(app.EventID));
-               
+
                 if (team == null)
                 {
                     //He/she is a team owner/leader
@@ -98,6 +96,7 @@ namespace PX_Project_Version_3.Pages
                 else
                 {
                     hasTeam = true;
+                    return Page();
                 }
 
                 Member member = _context.Member.FirstOrDefault(m => m.UserID.Equals(user.UserId) && m.EventID.Equals(app.EventID));
@@ -105,17 +104,23 @@ namespace PX_Project_Version_3.Pages
                 if (member == null)
                 {
                     hasTeam = false;
+                    return Page();
                 }
                 else
                 {
                     hasTeam = true;
+                    return Page();
                 }
 
-                return Page();
+
             }
             else
             {
-                return Page();            }         
+                //This is because he/she is probably a judge
+                //Which means he/she cannot have a team for the give event
+                hasTeam = false;
+                return Page();
+            }
 
             //Might have to confirm the admin access rights once more with the group
 

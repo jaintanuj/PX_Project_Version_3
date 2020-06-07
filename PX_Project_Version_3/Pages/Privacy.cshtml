@@ -27,21 +27,22 @@
     @if (Model.isUser)
     {
         <li>Team</li>
-        <ul>
+        if (Model.hasTeam)
+        {
+            <ul>
 
-            <li><a asp-page="./MyTeam">MyTeam</a></li>
-        </ul>
+                <li><a asp-page="./MyTeam">MyTeam</a></li>
+            </ul>
+        }
         <!--Need to work on a way to seperate the two based on the requirements-->
-        <ul>
-            <li><a asp-page="./CreateTeam">Create Team</a></li>
-            <li><a asp-page="./JoinTeam">Join Team</a></li>
-        </ul>
+        if (!Model.hasTeam)
+        {
+            <ul>
+                <li><a asp-page="./CreateTeam">Create Team</a></li>
+                <li><a asp-page="./JoinTeam">Join Team</a></li>
+            </ul>
+        }
         <!--This will be used to see the total number of votes for the event only-->
-    }
-
-    @if (Model.isJudge)
-    {
-        <li>Vote Team</li>
     }
     @if (Model.isAdmin)
     {
@@ -52,7 +53,9 @@
         //Add new themes as only admin can create new themes
         <li><a asp-page="./ManageJudges">Manage Judges</a></li>
         //The page below is for managing users and their details
-        <li><a asp-page="./AllUsers" >Manage Users</a></li>
+        <li><a asp-page="./AllUsers">Manage Users</a></li>
+        //Now we need to be able to change the conditions set for an event
+        <li><a asp-page="./EditEventConditions"></a></li>
     }
 
     <li><a asp-page="LogOut">Sign-Out</a></li>

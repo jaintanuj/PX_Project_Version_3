@@ -257,3 +257,7 @@ C:\Users\aarav\OneDrive\Desktop\tanuj\PX_Project_Version_3\PX_Project_Version_3\
 C:\Users\aarav\OneDrive\Desktop\tanuj\PX_Project_Version_3\PX_Project_Version_3\obj\Debug\netcoreapp3.1\Razor\Pages\DeleteTeamByAdmin.cshtml.g.cs
 C:\Users\aarav\OneDrive\Desktop\tanuj\PX_Project_Version_3\PX_Project_Version_3\obj\Debug\netcoreapp3.1\Razor\Pages\AllUsers.cshtml.g.cs
 C:\Users\aarav\OneDrive\Desktop\tanuj\PX_Project_Version_3\PX_Project_Version_3\obj\Debug\netcoreapp3.1\Razor\Pages\DeleteUser.cshtml.g.cs
+C:\Users\aarav\OneDrive\Desktop\tanuj\PX_Project_Version_3\PX_Project_Version_3\obj\Debug\netcoreapp3.1\Razor\Pages\AllThemes.cshtml.g.cs
+C:\Users\aarav\OneDrive\Desktop\tanuj\PX_Project_Version_3\PX_Project_Version_3\obj\Debug\netcoreapp3.1\Razor\Pages\EditTheme.cshtml.g.cs
+C:\Users\aarav\OneDrive\Desktop\tanuj\PX_Project_Version_3\PX_Project_Version_3\obj\Debug\netcoreapp3.1\Razor\Pages\DeleteTheme.cshtml.g.cs
+C:\Users\aarav\OneDrive\Desktop\tanuj\PX_Project_Version_3\PX_Project_Version_3\obj\Debug\netcoreapp3.1\Razor\Pages\EditEventConditions.cshtml.g.cs

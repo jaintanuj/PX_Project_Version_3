@@ -1,0 +1,46 @@
+﻿@page
+@model PX_Project_Version_3.Pages.DeleteThemeModel
+
+@{
+    ViewData["Title"] = "DeleteTheme";
+}
+
+<h1>DeleteTheme</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Theme</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Theme.ThemeName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Theme.ThemeName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Theme.ThemeType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Theme.ThemeType)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Theme.EventName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Theme.EventName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Theme.EventCode)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Theme.EventCode)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Theme.ThemeId" />
+        <input type="submit" value="Delete Theme" class="btn btn-danger" /> |
+        <a asp-page="./AllThemes">Back to AllThemes</a>
+    </form>
+</div>
