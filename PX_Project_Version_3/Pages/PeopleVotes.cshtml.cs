@@ -32,6 +32,7 @@ namespace PX_Project_Version_3.Pages
             {
                 return RedirectToPage("Privacy");
             }
+ 
 
             AppCondition app = await _context.AppCondition.FirstOrDefaultAsync(app => app.AppConditionId.Equals(1));
 
@@ -83,7 +84,18 @@ namespace PX_Project_Version_3.Pages
         {
             string username = HttpContext.Session.GetString("username");
 
-            AppCondition app = await _context.AppCondition.FirstOrDefaultAsync(app => app.AppConditionId.Equals(1));
+                AppCondition app = await _context.AppCondition.FirstOrDefaultAsync(app => app.AppConditionId.Equals(1));
+
+                IList<TieBreaker> tiees = await _context.TieBreaker.Where(tie => tie.EventID.Equals(app.EventID)).ToListAsync();
+
+            if (tiees != null)
+            {
+                foreach(var tie in tiees)
+                {
+                    _context.TieBreaker.Remove(tie);
+                    await _context.SaveChangesAsync();
+                }
+            }
 
             if (username.Equals(app.AdminName))
             {
@@ -207,9 +219,13 @@ namespace PX_Project_Version_3.Pages
 
                 return RedirectToPage("PeopleWinnerList");
             }
-
-            //Have to change it to Peoples winners page
-            return RedirectToPage("./Privacy");
+            else
+            {
+                //Which would mean that there is same votes among current event teams
+                return RedirectToPage("TieBreak");
+                //So for now we won't delete teams but will do it later on
+            }
+           
         }
     }
 }

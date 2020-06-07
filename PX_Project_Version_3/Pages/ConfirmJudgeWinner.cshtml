@@ -1,0 +1,40 @@
+﻿@page
+@model PX_Project_Version_3.Pages.ConfirmJudgeWinnerModel
+
+@{
+    ViewData["Title"] = "ConfirmJudgeWinner";
+}
+
+<h1>ConfirmJudgeWinner</h1>
+
+<h3>Are you sure you want to make this team as judge winner?</h3>
+<div>
+    <h4>TieBreaker</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TeamName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TeamName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EventCode)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EventCode)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="TieBreaker.TieBreakerId" />
+        <input type="submit" value="Make Winner" class="btn btn-primary" /> |
+        <a asp-page="./JudgeVotes">Back to Judges Votes</a>
+    </form>
+</div>

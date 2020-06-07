@@ -37,5 +37,7 @@ namespace PX_Project_Version_3.Data
         public DbSet<PX_Project_Version_3.Models.PeopleWinner> PeopleWinner { get; set; }
 
         public DbSet<PX_Project_Version_3.Models.JudgeWinner> JudgeWinner { get; set; }
+
+        public DbSet<PX_Project_Version_3.Models.TeamPresentation> TeamPresentation { get; set; }
     }
 }

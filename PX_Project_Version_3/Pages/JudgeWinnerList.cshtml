@@ -1,0 +1,82 @@
+﻿@page
+@model PX_Project_Version_3.Pages.JudgeWinnerListModel
+
+@{
+    ViewData["Title"] = "JudgeWinnerList";
+}
+
+<h1>JudgeWinnerList</h1>
+
+<br />
+
+<div>
+    <form method="post">
+        <select name="eventid" asp-items="Model.eventList"></select>
+        <input type="submit" class="btn btn-primary" value="Filter Results">
+    </form>
+</div>
+<br />
+
+
+<h3>@Model.Message</h3>
+
+
+<br />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.JudgeWinner[0].UserID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JudgeWinner[0].TeamName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JudgeWinner[0].EventID)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.JudgeWinner)
+        {
+
+            foreach (var user in Model.allUser)
+            {
+                if (item.UserID.Equals(user.UserId))
+                {
+                    Model.UserName = user.UserName;
+                    break;
+                }
+                Model.UserName = "Not-Found";
+            }
+
+            foreach (var eve in Model.allEvents)
+            {
+                if (item.EventID.Equals(eve.EventId))
+                {
+                    Model.EventCode = eve.EventCode;
+                    break;
+                }
+                Model.EventCode = "Not-Found";
+            }
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.UserName)
+                </td>
+               
+                <td>
+                    @Html.DisplayFor(modelItem => item.TeamName)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.EventCode)
+                </td>
+                <td>
+                    <a asp-page="./Details" asp-route-id="@item.JudgeWinnerId">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

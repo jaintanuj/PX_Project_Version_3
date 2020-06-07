@@ -1,0 +1,61 @@
+﻿@page
+@model PX_Project_Version_3.Pages.AllUsersModel
+
+@{
+    ViewData["Title"] = "AllUsers";
+}
+
+<h1>AllUsers</h1>
+
+<p>
+    @Model.Message   
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.allUsers[0].UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.allUsers[0].Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.allUsers[0].FullName)
+            </th>
+
+            @if (Model.isAdmin)
+            {
+                <th></th>
+                <th></th>
+
+            }
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.allUsers) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            @if (Model.isAdmin)
+            {
+                <td>
+                    <a asp-page="./EditUser" asp-route-id="@item.UserId">Edit User</a>
+                </td>
+                    
+                <td>
+                    <a asp-page="./DeleteUser" asp-route-id="@item.UserId"> Delete User </a>
+                </td>
+}
+    
+        </tr>
+}
+    </tbody>
+</table>

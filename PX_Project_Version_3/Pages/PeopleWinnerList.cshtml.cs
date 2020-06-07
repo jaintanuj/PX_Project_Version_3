@@ -23,6 +23,10 @@ namespace PX_Project_Version_3.Pages
         }
 
         public IList<PeopleWinner> PeopleWinner { get;set; }
+        public string EventCode { get; set; }
+        public string UserName { get; set; }
+        public IList<User> allUsers { get; set; }
+        public IList<Event> allEvents { get; set; }
         public List<SelectListItem> eventList { get; set; } 
         public string Message { get; set; }
 
@@ -41,15 +45,15 @@ namespace PX_Project_Version_3.Pages
 
             PeopleWinner = await _context.PeopleWinner.ToListAsync();
 
+            allEvents = await _context.Event.ToListAsync();
+            allUsers = await _context.User.ToListAsync();
+
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
             //Here i will take a look at drop down filtering the people winner by eventid
-            
-
-            
 
             eventList = await _context.Event.Select(eve => new SelectListItem
             {
@@ -57,7 +61,17 @@ namespace PX_Project_Version_3.Pages
                 Text = eve.EventCode
             }).ToListAsync();
 
+            allEvents = await _context.Event.ToListAsync();
+            allUsers = await _context.User.ToListAsync();
+
             var code = Request.Form["eventid"];
+
+            if (code == "All")
+            {
+                PeopleWinner = await _context.PeopleWinner.ToListAsync();
+                return Page();
+            }
+
             Event eve = await _context.Event.FirstOrDefaultAsync(eve => eve.EventCode.Equals(code));
             PeopleWinner = await _context.PeopleWinner.Where(peo => peo.EventID.Equals(eve.EventId)).ToListAsync();
 

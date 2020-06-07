@@ -14,13 +14,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.TieBreaker[0].TeamID)
+                @Html.DisplayNameFor(model => model.TeamName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TieBreaker[0].UserID)
+                @Html.DisplayNameFor(model => model.UserName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TieBreaker[0].EventID)
+                @Html.DisplayNameFor( model => model.EventCode)
             </th>
             <th></th>
         </tr>
@@ -28,19 +28,47 @@
     <tbody>
 @foreach (var item in Model.TieBreaker) {
         <tr>
+            @foreach (var team in Model.allTeams)
+            {
+                if (team.TeamId.Equals(item.TeamID))
+                {
+                    Model.TeamName = team.TeamName;
+                    break;
+                }
+                Model.TeamName = "Not-Found";
+            }
+
+            @foreach (var user in Model.allUsers)
+            {
+                if (user.UserId.Equals(item.UserID))
+                {
+                    Model.UserName = user.UserName;
+                    break;
+                }
+                Model.UserName = "Not-Found";
+            }
+
+            @foreach (var eve in Model.allEvents)
+            {
+                if (eve.EventId.Equals(item.EventID))
+                {
+                    Model.EventCode = eve.EventCode;
+                    break;
+                }
+                Model.EventCode = "Not-Found";
+            }
+
             <td>
-                @Html.DisplayFor(modelItem => item.TeamID)
+                @Html.DisplayFor(model => model.TeamName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.UserID)
+                @Html.DisplayFor(model => model.UserName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.EventID)
+                @Html.DisplayFor(model => model.EventCode)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.TieBreakerId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.TieBreakerId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.TieBreakerId">Delete</a>
+               <a asp-page="./MakeWinner" asp-route-id="@item.TieBreakerId">Winner</a>
             </td>
         </tr>
 }

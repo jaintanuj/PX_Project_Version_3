@@ -1,0 +1,84 @@
+﻿@page
+@model PX_Project_Version_3.Pages.EditTeamDetailsModel
+
+@{
+    ViewData["Title"] = "EditTeamDetails";
+}
+
+<h1>EditTeamDetails</h1>
+
+<h4>Team</h4>
+<hr/>
+<h4>@Model.Message</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Team.TeamId" />
+            <div class="form-group">
+                <label asp-for="Team.TeamName" class="control-label"></label>
+                <input asp-for="Team.TeamName" class="form-control" />
+                <span asp-validation-for="Team.TeamName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Team.ProjectName" class="control-label"></label>
+                <input asp-for="Team.ProjectName" class="form-control" />
+                <span asp-validation-for="Team.ProjectName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Team.Idea" class="control-label"></label>
+                <input asp-for="Team.Idea" class="form-control" />
+                <span asp-validation-for="Team.Idea" class="text-danger"></span>
+            </div>
+            
+            @foreach (var user in Model.allUsers)
+            {
+                if (Model.Team.UserID.Equals(user.UserId))
+                {
+                    Model.UserName = user.UserName;
+                    break;
+                }
+                Model.UserName = "Not-Found";
+            }
+
+            <div class="form-group">
+                <label asp-for="@Model.UserName" class="control-label"></label>
+                <input disabled asp-for="@Model.UserName" class="form-control" />
+                <span asp-validation-for="Team.UserID" class="text-danger"></span>
+            </div>
+
+            @foreach (var eve in Model.allEvents)
+            {
+                if (Model.Team.EventID.Equals(eve.EventId))
+                {
+                    Model.EventCode = eve.EventCode;
+                    break;
+                }
+                Model.EventCode = "Not-Found";
+            }
+
+            <div class="form-group">
+                <label asp-for="@Model.EventCode" class="control-label"></label>
+                <input disabled asp-for="@Model.EventCode" class="form-control" />
+                <span asp-validation-for="Team.EventID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Team.JoinCode" class="control-label"></label>
+                <input disabled asp-for="Team.JoinCode" class="form-control" />
+                <span asp-validation-for="Team.JoinCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Update" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./AllTeams">Back to AllTeams</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,58 @@
+﻿@page
+@model PX_Project_Version_3.Pages.ManageJudgesModel
+
+@{
+    ViewData["Title"] = "ManageJudges";
+}
+
+<h1>ManageJudges</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Users[0].UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Users[0].Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Users[0].FullName)
+            </th>
+            <th>@Html.DisplayNameFor(model => model.JudgeStatus)</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Users) {
+        <tr>
+
+            @foreach (var judge in Model.Judges)
+            {
+                if (judge.UserID.Equals(item.UserId))
+                {
+                    Model.JudgeStatus = "Remove-Judge";
+                    break;
+                }
+                Model.JudgeStatus = "Make-Judge";
+            }
+
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+              <a asp-page="./ConfirmJudge" asp-route-id="@item.UserId"> @Model.JudgeStatus</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -200,6 +200,30 @@ namespace PX_Project_Version_3.Migrations
                     b.ToTable("Team");
                 });
 
+            modelBuilder.Entity("PX_Project_Version_3.Models.TeamPresentation", b =>
+                {
+                    b.Property<int>("TeamPresentationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("EventID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TeamID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TeamName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TeamPresentationId");
+
+                    b.ToTable("TeamPresentation");
+                });
+
             modelBuilder.Entity("PX_Project_Version_3.Models.Theme", b =>
                 {
                     b.Property<int>("ThemeId")

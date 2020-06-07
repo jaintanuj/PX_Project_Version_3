@@ -1,0 +1,76 @@
+﻿@page
+@model PX_Project_Version_3.Pages.TieBreaakForJudgeWinnerModel
+
+@{
+    ViewData["Title"] = "TieBreaakForJudgeWinner";
+}
+
+<h1>TieBreaakForJudgeWinner</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TeamName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EventCode)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.TieBreakers) {
+
+
+    foreach (var user in Model.allUsers)
+    {
+        if (item.UserID.Equals(user.UserId))
+        {
+            Model.UserName = user.UserName;
+            break;
+        }
+    }
+
+    foreach (var team in Model.allTeams)
+    {
+        if (item.TeamID.Equals(team.TeamId))
+        {
+            Model.TeamName = team.TeamName;
+            break;
+        }
+    }
+
+    foreach (var eve in Model.allEvents)
+    {
+        if (item.EventID.Equals(eve.EventId))
+        {
+            Model.EventCode = eve.EventCode;
+            break;
+        }
+    }
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.TeamName)
+            </td>
+           
+            <td>
+                @Html.DisplayFor(model => model.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.EventCode)
+            </td>
+            <td>
+                <a asp-page="./ConfirmJudgeWinner" asp-route-id="@item.TieBreakerId">Winner</a>
+               
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

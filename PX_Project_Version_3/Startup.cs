@@ -10,6 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using PX_Project_Version_3.Data;
+using System.IO;
+using Microsoft.Extensions.FileProviders;
 
 namespace PX_Project_Version_3
 {
@@ -27,6 +29,8 @@ namespace PX_Project_Version_3
         {
             services.AddRazorPages();
             services.AddSession();
+            //Not exactly sure what this one does but for testing
+            services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(),"wwwroot")));
             services.AddDbContext<PX_Project_Version_3Context>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("PX_Project_Version_3Context")));
         }

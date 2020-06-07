@@ -1,0 +1,46 @@
+﻿@page
+@model PX_Project_Version_3.Pages.ConfirmJudgeModel
+
+@{
+    ViewData["Title"] = "ConfirmJudge";
+}
+
+<h1>ConfirmJudge</h1>
+
+<h3>@Model.Message</h3>
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.UserName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.UserName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.FullName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.FullName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EventCode)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EventCode)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="User.UserId" />
+        <input type="submit" value="@Model.buttonStatus" class="btn btn-primary" /> |
+        <a asp-page="./ManageJudges">Back to Judges Management</a>
+    </form>
+</div>

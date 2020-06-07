@@ -1,0 +1,49 @@
+﻿@page
+@model PX_Project_Version_3.Pages.UploadTeamPresentationModel
+
+@{
+    ViewData["Title"] = "UploadTeamPresentation";
+}
+
+<h1>UploadTeamPresentation</h1>
+
+<h3>Please select a file to upload for your team project?</h3>
+<div>
+    <h4>Team</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Team.TeamName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Team.TeamName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Team.ProjectName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Team.ProjectName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Team.Idea)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Team.Idea)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Team.JoinCode)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Team.JoinCode)
+        </dd>
+    </dl>
+    
+    <div class="text-center">
+        <hr />
+        <form method="post" enctype="multipart/form-data">
+            <input id="file1" type="file" asp-for="@Model.UploadFile">
+            <input type="submit" id="submit" value="Upload File" class="btn btn-success">
+            <hr />
+        </form>
+    </div>
+</div>

@@ -1,0 +1,112 @@
+﻿@page
+@model PX_Project_Version_3.Pages.AllTeamsModel
+
+@{
+    ViewData["Title"] = "AllTeams";
+}
+
+<h1>AllTeams</h1>
+
+<p>
+    @Model.Message
+</p>
+
+<div>
+    <div>
+        <form method="post">
+            <select name="eventid" asp-items="Model.eventList"></select>
+            <input type="submit" class="btn btn-primary" value="Filter Results">
+        </form>
+    </div>  
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Team[0].TeamName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Team[0].ProjectName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Team[0].Idea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EventCode)
+            </th>
+
+            <th>
+                Team Details
+                </th>
+
+            @if (Model.isAdmin)
+            {
+                <th></th>
+                <th></th>
+            }
+
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Team) {
+
+
+    foreach (var user in Model.allUsers)
+    {
+        if (item.UserID.Equals(user.UserId))
+        {
+            Model.UserName = user.UserName;
+            break;
+        }
+        Model.UserName = "Not-Found";
+    }
+
+    foreach (var eve in Model.allEvents)
+    {
+        if (item.EventID.Equals(eve.EventId))
+        {
+            Model.EventCode = eve.EventCode;
+            break;
+        }
+        Model.EventCode = "Not-Found";
+    }
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TeamName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Idea)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.EventCode)
+            </td>
+
+            <td>
+                <a asp-page="./TeamDetails" asp-route-id="@item.TeamId">Team Details</a>
+            </td>
+
+            @if (Model.isAdmin)
+            {
+                <td>
+                    <a asp-page="./EditTeamDetails" asp-route-id="@item.TeamId">Edit Team</a> 
+                </td>
+
+                 <td>
+                    <a asp-page="./DeleteTeamByAdmin" asp-route-id="@item.TeamId">Delete Team</a> 
+                </td>
+            }
+        </tr>
+}
+    </tbody>
+</table>

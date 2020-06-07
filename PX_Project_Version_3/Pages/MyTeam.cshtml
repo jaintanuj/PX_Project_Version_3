@@ -6,11 +6,13 @@
     ViewData["Title"] = "MyTeam";
 }
 
-<h1>@HttpContext.Session.GetString("username");</h1>
+<h1>Welcome @HttpContext.Session.GetString("username")</h1>
 
 <div>
     <h4>Team</h4>
     <hr />
+    <h4>@Model.Message</h4>
+    <br/>
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Team.TeamName)
@@ -47,6 +49,17 @@
     <div>
         <p><a asp-page="./TeamDetailsEdit">Edit Team Details</a></p>
         <p><a asp-page="./DeleteTeam">Delete My Team</a></p>
+        <p><a asp-page="./UploadTeamPresentation">Upload Team Presentation</a> </p>
+    </div>
+}
+
+@if (Model.TeamPresentationExists)
+{
+    <div>
+        <form method="post">
+            <input type="hidden" name="fileid" value="@Model.teamPresentation.TeamPresentationId">    
+            <input type="submit" class="btn btn-primary" value="Download Presentation">
+        </form>
     </div>
 }
 

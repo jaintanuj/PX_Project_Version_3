@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -68,6 +69,30 @@ namespace PX_Project_Version_3.Pages
             {
                 _context.Vote.Remove(vote);
                 await _context.SaveChangesAsync();
+            }
+
+            //we also need to remove the presentation of the team if any
+            TeamPresentation teamPresentation = await _context.TeamPresentation.FirstOrDefaultAsync(tp => tp.TeamID.Equals(Team.TeamId));
+
+            if (teamPresentation != null)
+            {
+
+                //We need to remove the file from the folder as well.
+                string storedFile = teamPresentation.FileName;
+                var oldPath = Path.Combine(Directory.GetCurrentDirectory(), "Files", storedFile);
+                if (System.IO.File.Exists(oldPath))
+                {
+                    System.IO.File.Delete(oldPath);
+                    _context.TeamPresentation.Remove(teamPresentation);
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    _context.TeamPresentation.Remove(teamPresentation);
+                    await _context.SaveChangesAsync();
+                }
+
+               
             }
 
             _context.Team.Remove(Team);
