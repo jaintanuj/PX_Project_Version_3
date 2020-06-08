@@ -50,15 +50,17 @@ namespace PX_Project_Version_3.Pages
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            int votes = Int32.Parse(Request.Form["votes"]);
-            int members = Int32.Parse(Request.Form["members"]);
+            //We are not going to recommend 
+
+            int voteLimit = Int32.Parse(Request.Form["votes"]);
+            int memberLimit = Int32.Parse(Request.Form["members"]);
             int themeID = Int32.Parse(Request.Form["themeid"]);
             int adminid = Int32.Parse(Request.Form["adminid"]);
 
             User user = await _context.User.FirstOrDefaultAsync(u => u.UserId.Equals(adminid));
             if (user == null)
             {
-                Message = "Something went wrong while updating admin";
+                Message = "Something went wrong while updating admin!!";
                 return Page();
             }
 
@@ -74,7 +76,34 @@ namespace PX_Project_Version_3.Pages
             //For members there are two ways:
             //1. The members will increase which does not matter if the winner has been decided
             //2. The members will decrease which matter cause we have to remove all members
-            //As 
+            //As the members will have to removed from their teams
+            int oldMembersLimit = app.MemberPerTeam;
+
+            if (memberLimit >= oldMembersLimit)
+            {
+                //In this scenario we have to make sure winner hasn't been decided yet
+                PeopleWinner peopleWinner = await _context.PeopleWinner.FirstOrDefaultAsync(pw => pw.EventID.Equals(app.EventID));
+
+                JudgeWinner judgeWinner = await _context.JudgeWinner.FirstOrDefaultAsync(jw => jw.EventID.Equals(app.EventID));
+
+                if (peopleWinner != null || judgeWinner != null)
+                {
+                    //That would mean that the winner has already been finalised
+                    //So we can just skip it all together
+                }
+                else
+                {
+                    //Need to clarify my thoughts before i can proceed
+                }
+            }
+            else
+            {
+                //This is the case where the members have been 
+
+            }
+            
+            
+
 
             return RedirectToPage("Privacy");
         }
