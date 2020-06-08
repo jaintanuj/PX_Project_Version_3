@@ -47,15 +47,13 @@
     @if (Model.isAdmin)
     {
         //This will be used to start new event at the end of the event
-        <li><a asp-page="NewEvent">Start New Event</a></li>
-        //This will be used to update the appCondition table not new as there will always be one unit
-        <li><a asp-page="UpdateTheme">Update Event Theme</a></li>
+        <li><a asp-page="StartNewEvent">Start New Event</a></li>
         //Add new themes as only admin can create new themes
         <li><a asp-page="./ManageJudges">Manage Judges</a></li>
         //The page below is for managing users and their details
         <li><a asp-page="./AllUsers">Manage Users</a></li>
-        //Now we need to be able to change the conditions set for an event
-        <li><a asp-page="./EditEventConditions"></a></li>
+        
+        
     }
 
     <li><a asp-page="LogOut">Sign-Out</a></li>
