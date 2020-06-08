@@ -5,12 +5,51 @@
     ViewData["Title"] = "Votes";
 }
 
+
+<!-- Overriding Datatables classes -->
+<style>
+    .searchBox > div {
+        float: none;
+    }
+
+    .dataTables_wrapper .searchBox .dataTables_filter {
+        float: left
+    }
+</style>
+
+<head>
+    <link rel="stylesheet" href="~/css/master.css">
+    <!-- DataTables CSS and JS-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+    <script src="~/js/jquery-3.5.1.js"></script>
+    <script src="~/js/jquery.dataTables.min.js"></script>
+    <script src="~/js/dataTables.editor.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#table').DataTable({
+                dom: '<"searchBox"f>t',
+                responsive: true,
+                columnDefs: [
+                    { responsivePriority: 1 },
+                    { responsivePriority: 2 },
+                    { responsivePriority: 3 },
+                    { responsivePriority: 4 },
+                    { responsivePriority: 5 }
+                ]
+            });
+        });
+    </script>
+</head>
+
 <h1>Votes</h1>
 
 <p>
     @Model.Message
 </p>
-<table class="table">
+<table class="table" id="table">
     <thead>
         <tr>
             <th>
@@ -32,17 +71,18 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Team) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TeamName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProjectName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Idea)
-            </td>
+        @foreach (var item in Model.Team)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TeamName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProjectName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Idea)
+                </td>
                 @foreach (var eve in Model.AllEvents)
                 {
                     if (eve.EventId.Equals(item.EventID))
@@ -60,7 +100,7 @@
                         break;
                     }
                 }
-                
+
                 @foreach (var vote in Model.UserVotes)
                 {
                     if (vote.TeamID.Equals(item.TeamId))
@@ -70,16 +110,16 @@
                     }
                     Model.VoteStatus = "Vote";
                 }
-            <td>
-                @Html.DisplayFor(model => model.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.EventCode)
-            </td>
-            <td>
-                <a asp-page="./ConfirmVoting" asp-route-id="@item.TeamId">@Model.VoteStatus</a>
-            </td>
-        </tr>
-}
+                <td>
+                    @Html.DisplayFor(model => model.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.EventCode)
+                </td>
+                <td>
+                    <a asp-page="./ConfirmVoting" asp-route-id="@item.TeamId">@Model.VoteStatus</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

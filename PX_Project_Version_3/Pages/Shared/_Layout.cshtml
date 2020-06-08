@@ -3,6 +3,7 @@
 <head>
 
     <meta charset="utf-8" />
+    <script src="~/js/jquery-3.5.1.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - InfoTrack Hackathon</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -16,48 +17,17 @@
             <div id="content">
 
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <div class="container-fluid">
-                        <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button"
-                                data-toggle="collapse" data-target="#navbarSupportedContent"
-                                aria-controls="navbarSupportedContent" aria-expanded="false"
-                                aria-label="Toggle navigation">
-                            <i class="fas fa-align-justify"></i>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="nav navbar-nav ml-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link font-weight-bold text-dark" href="/Index">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link font-weight-bold text-dark" href="#">My Team</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link font-weight-bold text-dark" href="#">Ideas</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link font-weight-bold text-dark" href="/Themes">Themes</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link font-weight-bold text-dark" href="/Projects">Projects</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link font-weight-bold text-dark" href="#">Winners</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link font-weight-bold text-dark" href="#">Voting</a>
-                                </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link font-weight-bold text-dark" href="/EventManager">Events</a>
-                                    </li>
-                                <li class="nav-item">
-                                    <a class="nav-link font-weight-bold text-dark" href="#">Users</a>
-                                </li>
-                            </ul>
-                        </div>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            @await Component.InvokeAsync("NavBarComponent")
+                        </ul>
                     </div>
                 </nav>
                 <br>
-
                 <!-- Content of Page-->
                 <main role="main" class="pb-3">
                     @RenderBody()
@@ -65,7 +35,8 @@
 
             </div>
         </div>
-    </div>
+    </div>                            
+
 
     <!-- Footer comes in here -->
     <div class="footer">
