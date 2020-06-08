@@ -1,53 +1,131 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - PX_Project_Version_3</title>
+    <title>@ViewData["Title"] - InfoTrack Hackathon</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/master.css">
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">PX_Project_Version_3</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/LogOut">LogOut</a>
-                        </li>
-                    </ul>
-                </div>
+    <div class="wrapperone">
+        <div class="wrapper">
+
+            <!-- Top Nav Bar  -->
+            <div id="content">
+
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="container-fluid">
+                        <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button"
+                                data-toggle="collapse" data-target="#navbarSupportedContent"
+                                aria-controls="navbarSupportedContent" aria-expanded="false"
+                                aria-label="Toggle navigation">
+                            <i class="fas fa-align-justify"></i>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="nav navbar-nav ml-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link font-weight-bold text-dark" href="/Index">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link font-weight-bold text-dark" href="#">My Team</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link font-weight-bold text-dark" href="#">Ideas</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link font-weight-bold text-dark" href="/Themes">Themes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link font-weight-bold text-dark" href="/Projects">Projects</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link font-weight-bold text-dark" href="#">Winners</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link font-weight-bold text-dark" href="#">Voting</a>
+                                </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link font-weight-bold text-dark" href="/EventManager">Events</a>
+                                    </li>
+                                <li class="nav-item">
+                                    <a class="nav-link font-weight-bold text-dark" href="#">Users</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <br>
+
+                <!-- Content of Page-->
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - PX_Project_Version_3 - <a asp-area="" asp-page="/Privacy">Privacy</a>
+    <!-- Footer comes in here -->
+    <div class="footer">
+        <div class="fotter-setting">
+            <div class="footer-bs">
+                <div class="row">
+                    <div class="col-md-4 footer-brand animated fadeInLeft">
+                        <h2>InfoTrack</h2>
+                    </div>
+                    <div class="col-md footer-nav animated fadeInUp">
+                        <div class="col-md">
+                            <ul class="list">
+                                <li><a href="#">About Us</a></li>
+                                <li><a href="#">Contacts</a></li>
+                                <li><a href="#">Terms & Condition</a></li>
+                                <li><a href="#">Privacy Policy</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-2 footer-social animated fadeInDown">
+                        <h4>Follow Us</h4>
+                        <ul>
+                            <li>
+                                <a href="https://www.facebook.com/infotrackaus"><i class="fab fa-facebook-f"> Facebook</i></a>
+                            </li>
+                            <li><a href="https://twitter.com/InfoTrack_aus"><i class="fab fa-twitter"> Twitter</i></a></li>
+                            <li>
+                                <a href="https://www.instagram.com/infotrack_au/"><i class="fab fa-instagram"> Instagram</i></a>
+                            </li>
+                            <li><a href="#"><i class="fas fa-rss"></i> RSS</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 footer-ns animated fadeInRight">
+                        <h4>Newsletter</h4>
+                        <p>A rover wearing a fuzzy suit doesn’t alarm the real penguins</p>
+                        <p>
+                            <div class="input-group">
+                                <button type="button"
+                                        class="btn btn-warning btn-block">
+                                    Go to Our Website!
+                                </button>
+                            </div><!-- /input-group -->
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </footer>
+    </div>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
 
-    @RenderSection("Scripts", required: false)
+    <!-- Bootstrap JS -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+    </script>
 </body>
 </html>
+
+

@@ -44,6 +44,8 @@ namespace PX_Project_Version_3.Pages
         [BindProperty]
         public User User { get; set; }
         public string Message { get; set; }
+        [TempData]
+        public string Success { get; set; }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
@@ -101,7 +103,7 @@ namespace PX_Project_Version_3.Pages
 
             _context.User.Add(User);
             await _context.SaveChangesAsync();
-
+            Success = "You have successfully registered.";
             return RedirectToPage("./Index");
         }
 

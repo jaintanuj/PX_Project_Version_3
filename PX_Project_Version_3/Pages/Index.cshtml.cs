@@ -47,7 +47,7 @@ namespace PX_Project_Version_3.Pages
             User newuser = _context.User.FirstOrDefault(u => u.UserName.Equals(username));
             if (newuser == null)
             {
-                Message = "No such user exists!!";
+                Message = "Invalid username or password";
                 return null;
             }
             else
@@ -58,7 +58,7 @@ namespace PX_Project_Version_3.Pages
                 }
                 else
                 {
-                    Message = "Password is incorrect!!";
+                    Message = "Invalid username or password";
                 }
             }
             return null;
