@@ -7,9 +7,13 @@
 
 <h1>AllThemes</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
+<div>
+    <form method="post">
+        <select name="eventid" asp-items="Model.AllEvents"></select>
+        <input type="submit" class="btn btn-primary" value="Get Results">
+    </form>
+</div>
+
 <table class="table">
     <thead>
         <tr>
@@ -41,7 +45,6 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ThemeType)
             </td>
-           
             <td>
                 @Html.DisplayFor(modelItem => item.EventName)
             </td>

@@ -263,3 +263,4 @@ C:\Users\aarav\OneDrive\Desktop\tanuj\PX_Project_Version_3\PX_Project_Version_3\
 C:\Users\aarav\OneDrive\Desktop\tanuj\PX_Project_Version_3\PX_Project_Version_3\obj\Debug\netcoreapp3.1\Razor\Pages\StartNewEvent.cshtml.g.cs
 C:\Users\aarav\OneDrive\Desktop\tanuj\PX_Project_Version_3\PX_Project_Version_3\obj\Debug\netcoreapp3.1\Razor\Pages\CreateNewThemeForEvent.cshtml.g.cs
 C:\Users\aarav\OneDrive\Desktop\tanuj\PX_Project_Version_3\PX_Project_Version_3\obj\Debug\netcoreapp3.1\Razor\Pages\EventParametersUpdate.cshtml.g.cs
+C:\Users\aarav\OneDrive\Desktop\tanuj\PX_Project_Version_3\PX_Project_Version_3\obj\Debug\netcoreapp3.1\Razor\Pages\AllJudges.cshtml.g.cs

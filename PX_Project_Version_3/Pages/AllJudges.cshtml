@@ -1,0 +1,54 @@
+﻿@page
+@model PX_Project_Version_3.Pages.AllJudgesModel
+
+@{
+    ViewData["Title"] = "AllJudges";
+}
+
+<h1>AllJudges</h1>
+
+<div>
+    <form method="post">
+        <select name="eventid" asp-items="Model.allEvents"></select>
+        <input type="submit" class="btn btn-primary" value="Get Results">
+    </form>
+    </div>
+
+<table class="table">
+    <thead>
+        <tr>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.Judge[0].UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EventCode)
+            </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Judge) {
+        <tr>
+            
+            @foreach (var eve in Model.Events)
+            {
+                if (eve.EventId.Equals(item.EventID))
+                {
+                    Model.EventCode = eve.EventCode;
+                    break;
+                }
+                Model.EventCode = "Not-Found";
+            }
+
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.EventCode)
+            </td>
+            
+        </tr>
+}
+    </tbody>
+</table>
