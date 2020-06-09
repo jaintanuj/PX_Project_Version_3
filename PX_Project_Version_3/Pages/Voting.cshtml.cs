@@ -53,7 +53,7 @@ namespace PX_Project_Version_3.Pages
             if (UserVotes.Count() >= app.VotesAllowed)
             {
                 //That means user has reached his/her to limit to vote for the event
-                Message = "You have reached max vote!! You need to unovte a Voted team";
+                Message = "You have reached max vote!! You need to unvote a Voted team";
             }
             else
             {

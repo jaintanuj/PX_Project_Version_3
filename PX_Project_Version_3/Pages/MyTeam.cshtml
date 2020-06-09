@@ -9,135 +9,168 @@
 <h1>Welcome @HttpContext.Session.GetString("username")</h1>
 
 <div>
-    <h4>Team</h4>
-    <hr />
-    <h4>@Model.Message</h4>
-    <br/>
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Team.TeamName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Team.TeamName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Team.ProjectName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Team.ProjectName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Team.Idea)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Team.Idea)
-        </dd>
-        @if (Model.isLeader)
-        {
+    <h4>My Team</h4>
+
+        <div class="banner">
+            <img src="~/lib/images/InfoTrackTeam.png"
+                 style="width:75%">
+        </div>
+
+        <hr />
+        <h4>@Model.Message</h4>
+        <br />
+        <dl class="row">
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Team.JoinCode)
+                @Html.DisplayNameFor(model => model.Team.TeamName)
             </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Team.JoinCode)
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.Team.TeamName)
             </dd>
-        }
-    </dl>
-</div>
-
-@if (Model.isLeader)
-{
-    <div>
-        <p><a asp-page="./TeamDetailsEdit">Edit Team Details</a></p>
-        <p><a asp-page="./DeleteTeam">Delete My Team</a></p>
-        <p><a asp-page="./UploadTeamPresentation">Upload Team Presentation</a> </p>
-    </div>
-}
-
-@if (Model.TeamPresentationExists)
-{
-    <div>
-        <form method="post">
-            <input type="hidden" name="fileid" value="@Model.teamPresentation.TeamPresentationId">    
-            <input type="submit" class="btn btn-primary" value="Download Presentation">
-        </form>
-    </div>
-}
-
-<div>
-    <h4>Leader</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Leader.UserName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Leader.UserName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Leader.FullName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Leader.FullName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Leader.Email)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Leader.Email)
-        </dd>
-    </dl>
-</div>
-
-<div>
-    <h4>Team Members</h4>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Members[0].UserName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Members[0].Email)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Members[0].FullName)
-                </th>
-                @if (Model.isLeader)
-                {
-                    <th>Remove Members</th>
-                }
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Members)
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Team.ProjectName)
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.Team.ProjectName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Team.Idea)
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.Team.Idea)
+            </dd>
+            @if (Model.isLeader)
             {
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Team.JoinCode)
+                </dt>
+                <dd class="col-sm-4">
+                    @Html.DisplayFor(model => model.Team.JoinCode)
+                </dd>
+            }
+        </dl>
+    </div>
+
+    @if (Model.isLeader)
+    {
+        <div>
+            <p>
+                <a class="col-sm-1" asp-page="./TeamDetailsEdit">
+                    <svg class="bi bi-pencil-square" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.502 1.94a.5.5 0 010 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 01.707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 00-.121.196l-.805 2.414a.25.25 0 00.316.316l2.414-.805a.5.5 0 00.196-.12l6.813-6.814z" />
+                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 002.5 15h11a1.5 1.5 0 001.5-1.5v-6a.5.5 0 00-1 0v6a.5.5 0 01-.5.5h-11a.5.5 0 01-.5-.5v-11a.5.5 0 01.5-.5H9a.5.5 0 000-1H2.5A1.5 1.5 0 001 2.5v11z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+
+
+                <a class="col-sm-1" asp-page="./DeleteTeam">
+                    <svg class="bi bi-trash-fill" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M2.5 1a1 1 0 00-1 1v1a1 1 0 001 1H3v9a2 2 0 002 2h6a2 2 0 002-2V4h.5a1 1 0 001-1V2a1 1 0 00-1-1H10a1 1 0 00-1-1H7a1 1 0 00-1 1H2.5zm3 4a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7a.5.5 0 01.5-.5zM8 5a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7A.5.5 0 018 5zm3 .5a.5.5 0 00-1 0v7a.5.5 0 001 0v-7z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+
+                <a class="col-sm-1" asp-page="./UploadTeamPresentation">
+                    <svg class="bi bi-upload" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8zM5 4.854a.5.5 0 0 0 .707 0L8 2.56l2.293 2.293A.5.5 0 1 0 11 4.146L8.354 1.5a.5.5 0 0 0-.708 0L5 4.146a.5.5 0 0 0 0 .708z" />
+                        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 2z" />
+                    </svg>
+                </a>
+            </p>
+        </div>
+    }
+
+    @if (Model.TeamPresentationExists)
+    {
+        <div>
+            <form method="post">
+                <input type="hidden" name="fileid" value="@Model.teamPresentation.TeamPresentationId">
+                <input type="submit" class="btn btn-primary" value="Download Presentation">
+            </form>
+        </div>
+    }
+
+    <br />
+
+    <div>
+        <h4>Leader</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Leader.UserName)
+            </dt>
+            <dd class="col-sm-1">
+                @Html.DisplayFor(model => model.Leader.UserName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Leader.FullName)
+            </dt>
+            <dd class="col-sm-1">
+                @Html.DisplayFor(model => model.Leader.FullName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Leader.Email)
+            </dt>
+            <dd class="col-sm-1">
+                @Html.DisplayFor(model => model.Leader.Email)
+            </dd>
+        </dl>
+    </div>
+
+    <br />
+
+    <div>
+        <h4>Team Members</h4>
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UserName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FullName)
-                    </td>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Members[0].UserName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Members[0].Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Members[0].FullName)
+                    </th>
                     @if (Model.isLeader)
                     {
-                        <td>
-                            <a asp-page="./RemoveMember" asp-route-id="@item.MemberId">Remove</a>
-                        </td>
+                        <th>Remove Members</th>
                     }
-
                 </tr>
-            }
-        </tbody>
-    </table>
-    <br />
-</div>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Members)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FullName)
+                        </td>
+                        @if (Model.isLeader)
+                        {
+                            <td>
+                                <a asp-page="./RemoveMember" asp-route-id="@item.MemberId">
+                                    <svg class="bi bi-trash-fill" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z" />
+                                    </svg>
+                                </a>
+                            </td>
+                        }
 
-@if (!Model.isLeader)
-{
-    <div>
-        <a asp-page="./LeaveTeam">Leave Team</a>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <br />
     </div>
-}
+
+    @if (!Model.isLeader)
+    {
+        <div>
+            <a asp-page="./LeaveTeam">Leave Team</a>
+        </div>
+    }

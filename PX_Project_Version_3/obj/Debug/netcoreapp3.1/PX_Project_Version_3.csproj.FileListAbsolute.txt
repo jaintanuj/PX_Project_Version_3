@@ -528,3 +528,4 @@ C:\Users\Chamath\Source\Repos\PX_Project_Version_3\PX_Project_Version_3\obj\Debu
 C:\Users\Chamath\Source\Repos\PX_Project_Version_3\PX_Project_Version_3\obj\Debug\netcoreapp3.1\PX_Project_Version_3.dll
 C:\Users\Chamath\Source\Repos\PX_Project_Version_3\PX_Project_Version_3\obj\Debug\netcoreapp3.1\PX_Project_Version_3.pdb
 C:\Users\Chamath\Source\Repos\PX_Project_Version_3\PX_Project_Version_3\obj\Debug\netcoreapp3.1\PX_Project_Version_3.genruntimeconfig.cache
+C:\Users\Chamath\Source\Repos\PX_Project_Version_3\PX_Project_Version_3\obj\Debug\netcoreapp3.1\Razor\Pages\Shared\Components\NavBarComponent\Default.cshtml.g.cs
