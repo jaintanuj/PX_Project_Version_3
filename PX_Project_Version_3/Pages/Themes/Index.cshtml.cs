@@ -102,7 +102,7 @@ namespace PX_Project_Version_3.Pages.Themes
             }
             else
             {
-                Message = "";
+                Message = ("Now displaying themes from event " + eve.EventCode);
             }
 
 

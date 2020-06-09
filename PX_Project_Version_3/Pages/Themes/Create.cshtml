@@ -12,7 +12,6 @@
         @Model.Message
     </p>
 
-
     <h4>Create a New Theme</h4>
     <hr />
     <strong>Inputs marked with <span style="color: red;">*</span> are required</strong>
@@ -42,13 +41,18 @@
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Create" class="btn btn-primary" />
+
                 </div>
             </form>
+            <div>
+                <a asp-page="Index">
+                    <svg class="bi bi-arrow-left" width="5em" height="5em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M5.854 4.646a.5.5 0 0 1 0 .708L3.207 8l2.647 2.646a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 0 1 .708 0z" />
+                        <path fill-rule="evenodd" d="M2.5 8a.5.5 0 0 1 .5-.5h10.5a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+                    </svg>
+                </a>
+            </div>
         </div>
-    </div>
-
-    <div>
-        <a asp-page="Index" class="btn btn-primary">Back to List</a>
     </div>
 }
 @if (!Model.isAdmin)

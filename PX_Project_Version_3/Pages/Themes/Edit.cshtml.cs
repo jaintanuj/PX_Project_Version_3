@@ -28,6 +28,7 @@ namespace PX_Project_Version_3.Pages.Themes
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            // Checking user's logged in role
             string username = HttpContext.Session.GetString("username");
 
             if (username == null)
@@ -71,8 +72,29 @@ namespace PX_Project_Version_3.Pages.Themes
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+            // Checking user's logged in role
+            string username = HttpContext.Session.GetString("username");
+
+            if (username == null)
+            {
+                return RedirectToPage("/Privacy");
+            }
+
+            AppCondition app = await _context.AppCondition.FirstOrDefaultAsync(app => app.AppConditionId.Equals(1));
+
+            if (username == app.AdminName)
+            {
+                isAdmin = true;
+            }
+            else
+            {
+                isAdmin = false;
+            }
+
             if (!ModelState.IsValid)
             {
+                EventsList = await _context.Event.ToListAsync();
+
                 return Page();
             }
 

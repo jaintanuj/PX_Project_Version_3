@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -22,9 +23,30 @@ namespace PX_Project_Version_3.Pages.Events
 
         [BindProperty]
         public Event Event { get; set; }
+        public bool isAdmin { get; set; }
+
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+
+            string username = HttpContext.Session.GetString("username");
+
+            if (username == null)
+            {
+                return RedirectToPage("/Privacy");
+            }
+
+            AppCondition app = await _context.AppCondition.FirstOrDefaultAsync(app => app.AppConditionId.Equals(1));
+
+            if (username == app.AdminName)
+            {
+                isAdmin = true;
+            }
+            else
+            {
+                isAdmin = false;
+            }
+
             if (id == null)
             {
                 return NotFound();
