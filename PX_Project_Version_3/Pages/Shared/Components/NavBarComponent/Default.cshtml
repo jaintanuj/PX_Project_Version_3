@@ -1,0 +1,64 @@
+﻿<!-- Dynamic navigation bar depending on what role logged in user is-->
+<!-- As long as the user is logged in-->
+@if (Model == 1 | Model == 2 | Model == 3 || Model == 4)
+{
+    <li class="nav-item"><a class="nav-link" asp-page="#">Home</a></li>
+    <li class="nav-item"><a class="nav-link" asp-page="/AllTeams">Teams</a></li>
+    <li class="nav-item"><a class="nav-link" asp-page="/AllThemes">Themes</a></li>
+    <li class="nav-item"><a class="nav-link" asp-page="/JudgesList">Judges</a></li>
+    <li class="nav-item"><a class="nav-link" asp-page="/AllEvents">Events</a></li>
+    <li class="nav-item"><a class="nav-link" asp-page="/Voting">Vote Team</a></li>
+    <li class="nav-item"><a class="nav-link" asp-page="/PeopleVotes">People's Votes</a></li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Winners List
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="/JudgeWinnerList">Judge's Winners</a>
+            <a class="dropdown-item" href="/PeopleWinnerList">People's Winners</a>
+        </div>
+    </li>
+}
+
+<!-- If the user is in a team-->
+@if (Model == 1)
+{
+    <li class="nav-item"><a class="nav-link" asp-page="/MyTeam">MyTeam</a></li>
+}
+
+<!-- If the user is not in a team-->
+@if (Model == 2)
+{
+    <li class="nav-item"><a class="nav-link" asp-page="/CreateTeam">Create Team</a></li>
+    <li class="nav-item"><a class="nav-link" asp-page="/JoinTeam">Join Team</a></li>
+}
+
+<!-- If the user is a judge-->
+@if (Model == 3)
+{
+    <li class="nav-item"><a class="nav-link" asp-page="/JudgeVotes">Judge's Votes</a></li>
+
+}
+
+<!-- If the user is an admin-->
+@if (Model == 4)
+{
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Administration
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="/StartNewEvent">Start New Event</a>
+            <a class="dropdown-item" href="/ManageJudges">Judges</a>
+            <a class="dropdown-item" href="/AllUsers">Userss</a>
+            <a class="dropdown-item" href="/Appconditions/Index">Events Settings</a>
+        </div>
+    </li>
+}
+
+<!-- Logout button for all users-->
+@if (Model == 1 | Model == 2 | Model == 3 || Model == 4)
+{
+    <li class="nav-item"><a class="nav-link " asp-page="/LogOut">Log Out</a></li>
+
+}

@@ -1,33 +1,38 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Sign In";
 }
+    <head>
+        <link rel="stylesheet" href="~/css/master.css">
+    </head>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <div class="text-center">
+        <img src="~/lib/images/InfoTrackLogo.png" alt="Trulli" width="400" height="200">
+    </div>
+<br />
+<br />
 
-<h3>Sign In!</h3>
-<br />
-<h4>@Model.Message</h4>
-<br />
-<br />
-<form method="post">
-    <table>
-        <tr>
-            <td>UserName</td>
-            <td><input asp-for="@Model.user.UserName" /></td>
-        </tr>
-        <tr>
-            <td>Password</td>
-            <td><input type="password" asp-for="@Model.user.Password" /></td>
-        </tr>
-        <tr>
-            <td>Login</td>
-            <td><input type="submit" value="Submit" /></td>
-        </tr>
-    </table>
-</form>
+<div align="center">
+    <h3>Sign In</h3>
+    <br />
+    <h4 style="color:red">@Model.Message</h4>
+    <h4>@TempData["Success"]</h4>
+    <br />
+    <form method="post">
+        <table>
+            <tr>
+                <td>Username</td>
+                <td><input asp-for="@Model.user.UserName" /></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" asp-for="@Model.user.Password" /></td>
+            </tr>
+        </table>
+        <br />
+        <input type="submit" value="Sign In" class="btn btn-primary">
+        &nbsp;
+        <a asp-page="./Register" class="btn btn-primary">Register</a>
+    </form>
 </div>

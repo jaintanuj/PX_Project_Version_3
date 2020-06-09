@@ -5,16 +5,22 @@
     ViewData["Title"] = "Register";
 }
 
-<h1>Register</h1>
-
-<h4>@Model.Message</h4>
+<head>
+    <link rel="stylesheet" href="~/css/master.css">
+</head>
 <hr />
-<div class="row">
+
+<div style="text-align: center">
+    <h1>Register</h1>
+    <h4 style="color:red">@Model.Message</h4>
+    <br />
+</div>
+<div class="row justify-content-center">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="User.UserName" class="control-label"></label>
+                <label asp-for="User.UserName" class="control-label">Username</label>
                 <input asp-for="User.UserName" class="form-control" />
                 <span asp-validation-for="User.UserName" class="text-danger"></span>
             </div>
@@ -29,21 +35,14 @@
                 <span asp-validation-for="User.Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="User.FullName" class="control-label"></label>
+                <label asp-for="User.FullName" class="control-label">Full Name</label>
                 <input asp-for="User.FullName" class="form-control" />
                 <span asp-validation-for="User.FullName" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="marginButton">
                 <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-page="Index" class="btn btn-primary">Return to Sign In Page</a>
             </div>
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

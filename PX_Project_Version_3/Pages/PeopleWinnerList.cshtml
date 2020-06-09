@@ -5,19 +5,58 @@
     ViewData["Title"] = "PeopleWinnerList";
 }
 
+<!-- Overriding Datatables classes -->
+<style>
+    .searchBox > div {
+        float: none;
+    }
+
+    .dataTables_wrapper .searchBox .dataTables_filter {
+        float: left
+    }
+</style>
+
+<head>
+    <link rel="stylesheet" href="~/css/master.css">
+    <!-- DataTables CSS and JS-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+    <script src="~/js/jquery-3.5.1.js"></script>
+    <script src="~/js/jquery.dataTables.min.js"></script>
+    <script src="~/js/dataTables.editor.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#table').DataTable({
+                dom: '<"searchBox"f>t',
+                responsive: true,
+                columnDefs: [
+                    { responsivePriority: 3 },
+                    { responsivePriority: 1 },
+                    { responsivePriority: 2 }
+                ]
+            });
+        });
+    </script>
+</head>
+
+
+
 <h1>PeopleWinnerList</h1>
-<br/>
+<br />
+
 
 <div>
     <form method="post">
         <select name="eventid" asp-items="Model.eventList"></select>
-        <input type="submit" class="btn btn-primary" value="Filter Results"> 
+        <input type="submit" class="btn btn-primary" value="Filter Results">
     </form>
 </div>
-<br/>
+<br />
 <h3>@Model.Message</h3>
-<br/>
-<table class="table">
+<br />
+<table class="table" id="table">
     <thead>
         <tr>
             <th>
@@ -29,45 +68,46 @@
             <th>
                 @Html.DisplayNameFor(model => model.EventCode)
             </th>
-           
+
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.PeopleWinner) {
-
-
-    foreach (var eve in Model.allEvents)
-    {
-        if (item.EventID.Equals(eve.EventId))
+        @foreach (var item in Model.PeopleWinner)
         {
-            Model.EventCode = eve.EventCode;
-            break;
-        }
-        Model.EventCode = "Not-Found";
-    }
 
-    foreach (var user in Model.allUsers)
-    {
-        if (item.UserID.Equals(user.UserId))
-        {
-            Model.UserName = user.UserName;
-            break;
-        }
-        Model.UserName = "Not-Found";
-    }
 
-        <tr>
-            <td>
-                @Html.DisplayFor(model => model.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TeamName)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.EventCode)
-            </td>
-           
-        </tr>
-}
+            foreach (var eve in Model.allEvents)
+            {
+                if (item.EventID.Equals(eve.EventId))
+                {
+                    Model.EventCode = eve.EventCode;
+                    break;
+                }
+                Model.EventCode = "Not-Found";
+            }
+
+            foreach (var user in Model.allUsers)
+            {
+                if (item.UserID.Equals(user.UserId))
+                {
+                    Model.UserName = user.UserName;
+                    break;
+                }
+                Model.UserName = "Not-Found";
+            }
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TeamName)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.EventCode)
+                </td>
+
+            </tr>
+        }
     </tbody>
 </table>

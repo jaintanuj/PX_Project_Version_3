@@ -8591,19 +8591,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\aarav\\.nuget\\packages\\": {}
+    "C:\\Users\\Chamath\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\PX_Project_Version_3.csproj",
+      "projectUniqueName": "C:\\Users\\Chamath\\Source\\Repos\\PX_Project_Version_3\\PX_Project_Version_3\\PX_Project_Version_3.csproj",
       "projectName": "PX_Project_Version_3",
-      "projectPath": "C:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\PX_Project_Version_3.csproj",
-      "packagesPath": "C:\\Users\\aarav\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\obj\\",
+      "projectPath": "C:\\Users\\Chamath\\Source\\Repos\\PX_Project_Version_3\\PX_Project_Version_3\\PX_Project_Version_3.csproj",
+      "packagesPath": "C:\\Users\\Chamath\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Chamath\\Source\\Repos\\PX_Project_Version_3\\PX_Project_Version_3\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\aarav\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Chamath\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8664,12 +8664,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[3.1.2, 3.1.2]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -8678,7 +8672,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
       }
     }
   }
