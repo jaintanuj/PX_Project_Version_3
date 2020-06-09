@@ -5,24 +5,23 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PX_Project_Version_3.Data;
 using PX_Project_Version_3.Models;
 
 namespace PX_Project_Version_3.Pages
 {
-    public class JudgeVotesModel : PageModel
+    public class JudgeThemeVotedTeamsModel : PageModel
     {
         private readonly PX_Project_Version_3.Data.PX_Project_Version_3Context _context;
 
-        public JudgeVotesModel(PX_Project_Version_3.Data.PX_Project_Version_3Context context)
+        public JudgeThemeVotedTeamsModel(PX_Project_Version_3.Data.PX_Project_Version_3Context context)
         {
             _context = context;
         }
 
-        public IList<Team> Team { get;set; }
-        public List<SelectListItem> allThemes { get; set; }
+        [BindProperty]
+        public IList<Team> Team { get; set; }
         public IList<User> allUsers { get; set; }
         public IList<Event> allEvents { get; set; }
         public bool isAdmin { get; set; }
@@ -30,8 +29,20 @@ namespace PX_Project_Version_3.Pages
         public string UserName { get; set; }
         public string eventCode { get; set; }
 
-        public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
+            if (id == null)
+            {
+                return RedirectToPage("JudgeThemeVoting");
+            }
+
+            Theme theme = await _context.Theme.FirstOrDefaultAsync(t => t.ThemeId.Equals(id));
+
+            if (theme == null)
+            {
+                return RedirectToPage("JudgeThemeVoting");
+            }
+
             string username = HttpContext.Session.GetString("username");
 
             if (username == null)
@@ -39,27 +50,18 @@ namespace PX_Project_Version_3.Pages
                 return RedirectToPage("Privacy");
             }
 
-            allEvents = await _context.Event.ToListAsync();
-            allUsers = await _context.User.ToListAsync();
-
             AppCondition app = await _context.AppCondition.FirstOrDefaultAsync(app => app.AppConditionId.Equals(1));
-            //We need to get all the judges for the current event
-            IList<Judge> allJudges = await _context.Judge.Where(j => j.EventID.Equals(app.EventID)).ToListAsync();
 
-            allThemes = await _context.Theme.Where(t => t.EventID.Equals(app.EventID)).Select(
-                a => new SelectListItem
-                {
-                    Value = a.ThemeId.ToString(),
-                    Text = a.ThemeName
-                }
-                ).ToListAsync();
+            Team = await _context.Team.Where(t => t.ThemeID.Equals(theme.ThemeId)).ToListAsync();
 
-            Team = await _context.Team.Where(t => t.EventID.Equals(app.EventID)).ToListAsync();
+            IList<Judge> allJudges = await _context.Judge.Where(j => j.EventID.Equals(app.EventID) && j.ThemeID.Equals(id)).ToListAsync();
 
             foreach (var team in Team)
             {
                 team.UserID = 0;
             }
+
+            allEvents = await _context.Event.ToListAsync();
 
             if (Team.Count() == 0)
             {
@@ -76,6 +78,7 @@ namespace PX_Project_Version_3.Pages
             {
                 isAdmin = false;
             }
+            allUsers = await _context.User.ToListAsync();
 
             foreach (var judge in allJudges)
             {
@@ -99,84 +102,13 @@ namespace PX_Project_Version_3.Pages
             return Page();
         }
 
-
-        public async Task<IActionResult> OnPostView()
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
-            var themeid = Int32.Parse(Request.Form["themeid"]);
-
-            AppCondition app = await _context.AppCondition.FirstOrDefaultAsync(app => app.AppConditionId.Equals(1));
-
-
-            Theme theme = await _context.Theme.FirstOrDefaultAsync(th => th.ThemeId.Equals(themeid));
-
-            if (theme == null)
+            if (id == null)
             {
-                return RedirectToPage("Privacy");
+                return NotFound();
             }
 
-            allThemes = await _context.Theme.Where(t => t.EventID.Equals(app.EventID)).Select(
-               a => new SelectListItem
-               {
-                   Value = a.ThemeId.ToString(),
-                   Text = a.ThemeName
-               }
-               ).ToListAsync();
-
-            allEvents = await _context.Event.ToListAsync();
-            allUsers = await _context.User.ToListAsync();
-
-            //We need to get all the judges for the current event
-            IList<Judge> allJudges = await _context.Judge.Where(j => j.EventID.Equals(app.EventID) && j.ThemeID.Equals(themeid)).ToListAsync();
-
-            Team = await _context.Team.Where(t => t.EventID.Equals(app.EventID) && t.ThemeID.Equals(themeid)).ToListAsync();
-
-            foreach (var team in Team)
-            {
-                team.UserID = 0;
-            }
-
-            if (Team.Count() == 0)
-            {
-                //Which means no team has been created for the specific event
-                Message = "Unfortunalty no team has been created for this event!!";
-                return Page();
-            }
-
-            string username = HttpContext.Session.GetString("username");
-
-            if (app.AdminName.Equals(username))
-            {
-                isAdmin = true;
-            }
-            else
-            {
-                isAdmin = false;
-            }
-
-            foreach (var judge in allJudges)
-            {
-                //We need to load all the votes each judge has made 
-                IList<Vote> allVotes = await _context.Vote.Where(v => v.UserID.Equals(judge.UserID) && v.EventID.Equals(app.EventID)).ToListAsync();
-
-                foreach (var vote in allVotes)
-                {
-                    foreach (var team in Team)
-                    {
-                        if (vote.TeamID.Equals(team.TeamId))
-                        {
-                            //So now that we have found the vote for the team
-                            //We wil just increment the vote for each team
-                            team.UserID += 1;
-                        }
-                    }
-                }
-            }
-
-
-            return Page();
-        }
-        public async Task<IActionResult> OnPostAsync()
-        {
             string username = HttpContext.Session.GetString("username");
             AppCondition app = await _context.AppCondition.FirstOrDefaultAsync(app => app.AppConditionId.Equals(1));
 
@@ -206,11 +138,11 @@ namespace PX_Project_Version_3.Pages
             }
 
             int highvotes = 0;
-            IList<Judge> allJudges = await _context.Judge.Where(j => j.EventID.Equals(app.EventID)).ToListAsync();
+            IList<Judge> allJudges = await _context.Judge.Where(j => j.EventID.Equals(app.EventID) && j.ThemeID.Equals(id)).ToListAsync();
 
             if (Team == null)
             {
-                Team = await _context.Team.Where(t => t.EventID.Equals(app.EventID)).ToListAsync();
+                Team = await _context.Team.Where(t => t.EventID.Equals(app.EventID) && t.ThemeID.Equals(id)).ToListAsync();
 
                 foreach (var team in Team)
                 {
@@ -236,7 +168,7 @@ namespace PX_Project_Version_3.Pages
                 foreach (var judge in allJudges)
                 {
                     //We need to load all the votes each judge has made 
-                    IList<Vote> allVotes = await _context.Vote.Where(v => v.UserID.Equals(judge.UserID) && v.EventID.Equals(app.EventID)).ToListAsync();
+                    IList<Vote> allVotes = await _context.Vote.Where(v => v.UserID.Equals(judge.UserID) && v.EventID.Equals(app.EventID) && judge.ThemeID.Equals(id)).ToListAsync();
 
                     foreach (var vote in allVotes)
                     {
@@ -261,19 +193,19 @@ namespace PX_Project_Version_3.Pages
                 }
             }
 
-            JudgeWinner judgeWinner = await _context.JudgeWinner.FirstOrDefaultAsync(jw => jw.EventID.Equals(app.EventID));
+            JudgeWinner judgeWinner = await _context.JudgeWinner.FirstOrDefaultAsync(jw => jw.EventID.Equals(app.EventID) );
 
-            if (judgeWinner != null)
-            {
-                Message = "Winner for the event has been finalized!!";
-                isAdmin = true;
-                return Page();
-            }
+            //if (judgeWinner != null)
+            //{
+            //    Message = "Winner for the event has been finalized!!";
+            //    isAdmin = true;
+            //    return Page();
+            //}
 
             foreach (var team in Team)
             {
                 //Now we find how many teams have got the highest votes
-                Team newTeam = await _context.Team.FirstOrDefaultAsync(t => t.TeamId.Equals(team.TeamId) && t.EventID.Equals(app.EventID));
+                Team newTeam = await _context.Team.FirstOrDefaultAsync(t => t.TeamId.Equals(team.TeamId) && t.ThemeID.Equals(id) && t.EventID.Equals(app.EventID));
 
                 if (team.UserID.Equals(highvotes))
                 {
@@ -319,6 +251,9 @@ namespace PX_Project_Version_3.Pages
             {
                 return RedirectToPage("TieBreaakForJudgeWinner");
             }
+
+
+           
         }
     }
 }

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using PX_Project_Version_3.Data;
 using PX_Project_Version_3.Models;
@@ -23,24 +24,24 @@ namespace PX_Project_Version_3.Pages
             _context = context;
         }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
             string username = HttpContext.Session.GetString("username");
 
-            User user = _context.User.FirstOrDefault(u => u.UserName.Equals(username)); 
+            User user = _context.User.FirstOrDefault(u => u.UserName.Equals(username));
             if (username == null)
             {
                 return Page();
             }
             else
             {
-               
+
                 if (user == null)
                 {
                     return RedirectToPage("Index");
                 }
             }
-           // User user = _context.User.FirstOrDefault(u => u.UserName.Equals(username));
+            // User user = _context.User.FirstOrDefault(u => u.UserName.Equals(username));
             //Now that everything regarding the user is checked we check if he/she already own a team 
             //Or that he/she is a member of another team with same event
             AppCondition app = _context.AppCondition.FirstOrDefault(app => app.AppConditionId.Equals(1));
@@ -52,6 +53,13 @@ namespace PX_Project_Version_3.Pages
                 //That would means he/she has a team
                 return RedirectToPage("Privacy");
             }
+
+            allThemes = await _context.Theme.Where(t => t.EventID.Equals(app.EventID)).Select(a => new SelectListItem
+            {
+                Value = a.ThemeId.ToString(),
+                Text = a.ThemeName
+            }).ToListAsync();
+
 
             Member member = _context.Member.FirstOrDefault(m => m.UserID.Equals(user.UserId) && m.EventID.Equals(app.EventID));
 
@@ -68,6 +76,7 @@ namespace PX_Project_Version_3.Pages
         [BindProperty]
         public Team Team { get; set; }
         public string Message { get; set; }
+        public List<SelectListItem> allThemes{get;set;}
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
@@ -81,6 +90,8 @@ namespace PX_Project_Version_3.Pages
 
             string username = HttpContext.Session.GetString("username");
             User user = _context.User.FirstOrDefault(u => u.UserName.Equals(username));
+
+            var themeid = Int32.Parse(Request.Form["theme"]);
             ///Which will not be null as we checked earlier in get function
             AppCondition app = _context.AppCondition.FirstOrDefault(app => app.AppConditionId.Equals(1));
           
@@ -103,6 +114,13 @@ namespace PX_Project_Version_3.Pages
                 }
             }
 
+            //Not sure about the event id for now 
+            //Just have to perform the checks on it
+            allThemes = await _context.Theme.Where(t => t.EventID.Equals(app.EventID)).Select(a => new SelectListItem {
+                Value = a.ThemeId.ToString(),
+                Text = a.ThemeName
+            }).ToListAsync();
+
             bool PasswordExist = true;
             while (PasswordExist)
             {
@@ -121,6 +139,8 @@ namespace PX_Project_Version_3.Pages
 
                 Team.JoinCode = joincode;
             }
+
+            Team.ThemeID = themeid;
 
             _context.Team.Add(Team);
             await _context.SaveChangesAsync();

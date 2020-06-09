@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PX_Project_Version_3.Data;
 using PX_Project_Version_3.Models;
@@ -22,10 +23,14 @@ namespace PX_Project_Version_3.Pages
 
         [BindProperty]
         public User User { get; set; }
+        public List<SelectListItem> allThemes { get; set; }
         public string EventCode { get; set; }
         public string Message { get; set; }
         public string EventName { get; set; }
+        public bool isJudge { get; set; }
         public string buttonStatus { get; set; }
+        public string ThemeName { get; set; }
+        public string ThemeType  { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -46,11 +51,13 @@ namespace PX_Project_Version_3.Pages
                 return RedirectToPage("ManageJudges");
             }
 
+            isJudge = false;
             Message = "Are you sure you want to make this user a judge?";
             buttonStatus = "Make-Judge";
 
             //So we just upload all the judges from the current event
             IList<Judge> judges = await _context.Judge.Where(j => j.EventID.Equals(app.EventID)).ToListAsync();
+            int themeid = 0;
 
             foreach (var judge in judges)
             {
@@ -58,12 +65,34 @@ namespace PX_Project_Version_3.Pages
                 {
                     Message = "Are you sure you want to remove this user from judges position?";
                     buttonStatus = "Remove-Judge";
+                    themeid = judge.ThemeID;
+                    isJudge = true;
+                    break;
                 }
             }
+
+            allThemes = await _context.Theme.Where(t => t.EventID.Equals(app.EventID)).Select(
+                a => new SelectListItem
+                {
+                    Value = a.ThemeId.ToString(),
+                    Text = a.ThemeName
+                }
+                ).ToListAsync();
 
             Event eve = await _context.Event.FirstOrDefaultAsync(eve => eve.EventId.Equals(app.EventID));
             EventCode = eve.EventCode;
             EventName = eve.EventName;
+
+            
+            
+
+            if (isJudge)
+            {
+                Theme theme = await _context.Theme.FirstOrDefaultAsync(t => t.ThemeId.Equals(themeid));
+
+                ThemeName = theme.ThemeName;
+                ThemeType = theme.ThemeType;
+            }
 
             return Page();
         }
@@ -75,6 +104,8 @@ namespace PX_Project_Version_3.Pages
                 //Which shouldn't be the case as only admin can access this page
                 return RedirectToPage("ManageJudges");
             }
+
+            
 
             AppCondition app = await _context.AppCondition.FirstOrDefaultAsync(app => app.AppConditionId.Equals(1));
 
@@ -140,11 +171,16 @@ namespace PX_Project_Version_3.Pages
                 }
             }
 
+            var themeid = Int32.Parse(Request.Form["themeid"]);
+
             Judge newJudge = new Judge()
             {
+
                 EventID = app.EventID,
                 UserID = user.UserId,
-                UserName = user.UserName
+                UserName = user.UserName,
+                ThemeID = themeid
+
             };
 
             _context.Judge.Add(newJudge);

@@ -9,7 +9,7 @@ using PX_Project_Version_3.Data;
 namespace PX_Project_Version_3.Migrations
 {
     [DbContext(typeof(PX_Project_Version_3Context))]
-    [Migration("20200606192848_InitialCreate")]
+    [Migration("20200609075827_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -80,6 +80,9 @@ namespace PX_Project_Version_3.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("EventID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ThemeID")
                         .HasColumnType("int");
 
                     b.Property<int>("UserID")
@@ -193,6 +196,9 @@ namespace PX_Project_Version_3.Migrations
                     b.Property<string>("TeamName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ThemeID")
+                        .HasColumnType("int");
 
                     b.Property<int>("UserID")
                         .HasColumnType("int");

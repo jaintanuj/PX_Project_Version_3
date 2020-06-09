@@ -21,11 +21,12 @@
         <li><a asp-page="./PeopleWinnerList">People Winners</a></li>
     </ul>
     <li><a asp-page="AllEvents">All Events</a></li>
-    <li><a asp-page="Voting">Vote Team</a></li>
+
     <li><a asp-page="./PeopleVotes">People Votes</a></li>
-    <li><a asp-page="./JudgeVotes">Judge Votes</a></li>
+    <li><a asp-page="./JudgeThemeVoting">Judge Votes</a></li>
     @if (Model.isUser)
     {
+        <li><a asp-page="Voting">Vote Team</a></li>
         <li>Team</li>
         if (Model.hasTeam)
         {
@@ -44,16 +45,25 @@
         }
         <!--This will be used to see the total number of votes for the event only-->
     }
+
+    @if (Model.isJudge)
+    {
+        <li>
+            <a asp-page="JudgeVoting">Vote Team</a>
+        </li>
+    }
+
     @if (Model.isAdmin)
     {
         //This will be used to start new event at the end of the event
         <li><a asp-page="StartNewEvent">Start New Event</a></li>
+        //now that we have an event we need to be able to allow admin to  add theme
+        <li><a asp-page="AddNewTheme">Add New Theme</a></li>
         //Add new themes as only admin can create new themes
         <li><a asp-page="./ManageJudges">Manage Judges</a></li>
         //The page below is for managing users and their details
         <li><a asp-page="./AllUsers">Manage Users</a></li>
-        
-        
+
     }
 
     <li><a asp-page="LogOut">Sign-Out</a></li>

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
 using PX_Project_Version_3.Data;
@@ -31,6 +32,8 @@ namespace PX_Project_Version_3.Pages
         public bool TeamPresentationExists { get; set; }
         public bool hideFileID { get; set; }
         public string Message { get; set; }
+        public string themeName { get; set; }
+        public string themeType { get; set; }
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -53,6 +56,7 @@ namespace PX_Project_Version_3.Pages
             //1.Leader check for the user i.e if user is the leader
             Team = await _context.Team.FirstOrDefaultAsync(t => t.UserID.Equals(loginuser.UserId) && t.EventID.Equals(app.EventID));
 
+            
 
             if (Team == null)
             {
@@ -78,6 +82,11 @@ namespace PX_Project_Version_3.Pages
                     Leader = await _context.User.FirstOrDefaultAsync(u => u.UserId.Equals(Team.UserID));
                     //Now we have everything required we just need to go to the page
 
+                    Theme theme = await _context.Theme.FirstOrDefaultAsync(t => t.ThemeId.Equals(Team.ThemeID));
+
+                    themeName = theme.ThemeName;
+                    themeType = theme.ThemeType;
+
                     //Before anything we have to perform various checks wether to show download presentation button or not
                     teamPresentation = await _context.TeamPresentation.FirstOrDefaultAsync(tp => tp.EventID.Equals(app.EventID) && tp.TeamID.Equals(Team.TeamId));
                     hideFileID = false;
@@ -97,6 +106,11 @@ namespace PX_Project_Version_3.Pages
             }
             else
             {
+                Theme theme = await _context.Theme.FirstOrDefaultAsync(t => t.ThemeId.Equals(Team.ThemeID));
+
+                themeName = theme.ThemeName;
+                themeType = theme.ThemeType;
+
                 //Before anything we have to perform various checks wether to show download presentation button or not
                 teamPresentation = await _context.TeamPresentation.FirstOrDefaultAsync(tp => tp.EventID.Equals(app.EventID) && tp.TeamID.Equals(Team.TeamId));
                 hideFileID = false;

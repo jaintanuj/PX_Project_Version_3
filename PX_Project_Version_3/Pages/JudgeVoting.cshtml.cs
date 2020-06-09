@@ -5,22 +5,24 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PX_Project_Version_3.Data;
 using PX_Project_Version_3.Models;
 
 namespace PX_Project_Version_3.Pages
 {
-    public class VotingModel : PageModel
+    public class JudgeVotingModel : PageModel
     {
         private readonly PX_Project_Version_3.Data.PX_Project_Version_3Context _context;
 
-        public VotingModel(PX_Project_Version_3.Data.PX_Project_Version_3Context context)
+        public JudgeVotingModel(PX_Project_Version_3.Data.PX_Project_Version_3Context context)
         {
             _context = context;
         }
 
         public IList<Team> Team { get;set; }
+        public List<SelectListItem> allThemes { get; set; }
         public IList<Event> AllEvents { get; set; }
         public IList<User> AllUsers { get; set; }
         public IList<Vote> UserVotes { get; set; }
@@ -28,8 +30,10 @@ namespace PX_Project_Version_3.Pages
         public string EventCode { get; set; }
         public string Email { get; set; }
         public string Message { get; set; }
+        public Theme theme { get; set; }
+        public string ThemeName { get; set; }
 
-        public  IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
             string username = HttpContext.Session.GetString("username");
 
@@ -38,9 +42,7 @@ namespace PX_Project_Version_3.Pages
                 return RedirectToPage("Privacy");
             }
 
-            //since in the beginning the vote table will be empty for all user so we just use 
             VoteStatus = "Vote";
-
 
             User loginUser = _context.User.FirstOrDefault(u => u.UserName.Equals(username));
             AppCondition app = _context.AppCondition.FirstOrDefault(app => app.AppConditionId.Equals(1));
@@ -62,10 +64,15 @@ namespace PX_Project_Version_3.Pages
 
             //Here we need to make sure if a judge tries to vote for a team
             //He/she can only vote a team with the same theme in the same event
+              //We need to check if the login user is a judge
 
-            bool isJudge = false;
-            
+            Judge judge = await _context.Judge.FirstOrDefaultAsync(j => j.UserID.Equals(loginUser.UserId));
 
+            //If the user is not a judge we just send it back
+            if (judge == null)
+            {
+                return RedirectToPage("Privacy");
+            }
 
             Team team = _context.Team.FirstOrDefault(t => t.UserID.Equals(loginUser.UserId) && t.EventID.Equals(app.EventID));
 
@@ -73,7 +80,11 @@ namespace PX_Project_Version_3.Pages
             if (team != null)
             {
                 //User does have a team for the event
-                Team = _context.Team.Where(t => (t.TeamId!=team.TeamId) && t.EventID.Equals(app.EventID)).ToList();
+                Team = _context.Team.Where(t => (t.TeamId != team.TeamId) && t.EventID.Equals(app.EventID) && t.ThemeID.Equals(judge.ThemeID)).ToList();
+
+                 theme = await _context.Theme.FirstOrDefaultAsync(t => t.ThemeId.Equals(judge.ThemeID));
+                ThemeName = theme.ThemeName;
+
                 return Page();
             }
 
@@ -81,14 +92,22 @@ namespace PX_Project_Version_3.Pages
 
             if (member != null)
             {
-                Team = _context.Team.Where(t => (t.TeamId != member.TeamID) && t.EventID.Equals(app.EventID)).ToList();
+                Team = _context.Team.Where(t => (t.TeamId != member.TeamID) && t.EventID.Equals(app.EventID) && t.ThemeID.Equals(judge.ThemeID)).ToList();
+
+                 theme = await _context.Theme.FirstOrDefaultAsync(t => t.ThemeId.Equals(judge.ThemeID));
+                ThemeName = theme.ThemeName;
+
                 return Page();
             }
 
-            Team = _context.Team.Where(t => t.EventID.Equals(app.EventID)).ToList();
+            //We just load all the teams with same theme AS THE JUDGE
+            Team = _context.Team.Where(t => t.EventID.Equals(app.EventID) && t.ThemeID.Equals(judge.ThemeID)).ToList();
 
-            
+             theme = await _context.Theme.FirstOrDefaultAsync(t => t.ThemeId.Equals(judge.ThemeID));
+            ThemeName = theme.ThemeName;
+
             return Page();
+               
         }
     }
 }

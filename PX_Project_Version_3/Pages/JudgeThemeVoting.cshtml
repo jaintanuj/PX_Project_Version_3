@@ -1,0 +1,55 @@
+﻿@page
+@model PX_Project_Version_3.Pages.JudgeThemeVotingModel
+
+@{
+    ViewData["Title"] = "JudgeThemeVoting";
+}
+
+<h1>JudgeThemeVoting</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Theme[0].ThemeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Theme[0].ThemeType)
+            </th>
+         
+            <th>
+                @Html.DisplayNameFor(model => model.Theme[0].EventName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Theme[0].EventCode)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Theme) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThemeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThemeType)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.EventName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventCode)
+            </td>
+            <td>
+                <a asp-page="./JudgeThemeVotedTeams" asp-route-id="@item.ThemeId">View Votes</a>
+                
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

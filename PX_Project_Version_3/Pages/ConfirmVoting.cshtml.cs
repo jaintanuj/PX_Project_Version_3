@@ -96,7 +96,28 @@ namespace PX_Project_Version_3.Pages
                 if (userVotes.Count() >= app.VotesAllowed)
                 {
                     //Limit has been reached
+                    //return RedirectToPage("Voting");
+
+                    //So now that the user has made a vote we need to send him back 
+                    //Based on his identity
+                     username = HttpContext.Session.GetString("username");
+
+                    IList<Judge> allJudges = await _context.Judge.Where(j => j.EventID.Equals(app.EventID)).ToListAsync();
+
+                    User user = await _context.User.FirstOrDefaultAsync(u => u.UserName.Equals(username));
+
+                    foreach (var judge in allJudges)
+                    {
+                        if (judge.UserID.Equals(user.UserId))
+                        {
+                            return RedirectToPage("JudgeVoting");
+                        }
+                    }
+
+                    //Other wise the user is just a normal user
+                    //So we just send him/her back to confirm voting
                     return RedirectToPage("Voting");
+
                 }
             }
 
@@ -151,14 +172,31 @@ namespace PX_Project_Version_3.Pages
                 };
                 _context.Vote.Add(newVote);
                 await _context.SaveChangesAsync();
-                return RedirectToPage("Voting");
+                
+
+
             }
             else{
                 //Then we will have to unvote this team as user has already votes fo4r this team
                 _context.Vote.Remove(vote);
                 await _context.SaveChangesAsync();
-                return RedirectToPage("Voting");
+             }
+
+
+            IList<Judge> allJudges = await _context.Judge.Where(j => j.EventID.Equals(app.EventID)).ToListAsync();
+            //Before we send the user back we need to the voting
+            //We need to perform certain checks for that
+            foreach (var judge in allJudges)
+            {
+                if (judge.UserID.Equals(user.UserId))
+                {
+                    return RedirectToPage("JudgeVoting");
+                }
             }
+
+            //Other wise the user is just a normal user
+            //So we just send him/her back to confirm voting
+            return RedirectToPage("Voting");
         }
     }
 }

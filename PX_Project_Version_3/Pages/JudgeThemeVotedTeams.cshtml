@@ -1,19 +1,19 @@
 ﻿@page
-@model PX_Project_Version_3.Pages.JudgeVotesModel
+@model PX_Project_Version_3.Pages.JudgeThemeVotedTeamsModel
 
 @{
-    ViewData["Title"] = "JudgeVotes";
+    ViewData["Title"] = "JudgeThemeVotedTeams";
 }
 
-<h1>JudgeVotes</h1>
+<h1>JudgeThemeVotedTeams</h1>
 
-<div>
+@*<div>
     <form method="post" asp-page-handler="view">
         <select name="themeid" asp-items="Model.allThemes"></select>
 
         <input type="submit" value="Filter Results">
     </form>
-</div>
+</div>*@
 
 <table class="table">
     <thead>
@@ -59,24 +59,24 @@
                 }
             }
 
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TeamName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProjectName)
-            </td>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TeamName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProjectName)
+                </td>
 
-            <td>
-                @Html.DisplayFor(model => model.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.eventCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserID)
-            </td>
-        </tr>
+                <td>
+                    @Html.DisplayFor(model => model.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.eventCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserID)
+                </td>
+            </tr>
         }
     </tbody>
 </table>

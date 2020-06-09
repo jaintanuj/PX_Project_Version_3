@@ -46,7 +46,13 @@
     
     <form method="post">
         <input type="hidden" asp-for="User.UserId" />
-        <input type="submit" value="@Model.buttonStatus" class="btn btn-primary" /> |
+
+        @if (!Model.isJudge)
+        {
+            <select name="themeid" asp-items="Model.allThemes"></select>
+        }
+
+        <input type="submit" value="@Model.buttonStatus" class="btn btn-primary" />
         <a asp-page="./ManageJudges">Back to Judges Management</a>
     </form>
 </div>

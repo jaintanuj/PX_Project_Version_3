@@ -24,6 +24,7 @@ namespace PX_Project_Version_3.Pages
         [BindProperty]
         public Team Team { get; set; }
         public IList<User> allUsers { get; set; }
+        public List<SelectListItem> allThemes { get; set; }
         public IList<Event> allEvents { get; set; }
         public string Message { get; set; }
         public IList<Team> allTeams { get; set; }
@@ -53,6 +54,16 @@ namespace PX_Project_Version_3.Pages
             {
                 return RedirectToPage("AllTeams");
             }
+
+            int themeid = Team.ThemeID;
+
+            allThemes = await _context.Theme.Where(t => t.EventID.Equals(app.EventID)).Select(
+                a => new SelectListItem
+                {
+                    Value = a.ThemeId.ToString(),
+                    Text = a.ThemeName
+                }
+                ).ToListAsync();
 
             allUsers = await _context.User.ToListAsync();
             UserName = "Not-Found";
@@ -98,7 +109,7 @@ namespace PX_Project_Version_3.Pages
             //We search if there is a team with same name 
             //IList<Team> allTeams = await _context.Team.Where(t => t.EventID.Equals(Team.EventID)).ToListAsync();
 
-            Team team1 = await _context.Team.FirstOrDefaultAsync(t => t.TeamName.Equals(Team.TeamName) && t.EventID.Equals(app.EventID));
+            Team team1 = await _context.Team.FirstOrDefaultAsync(t => t.UserID.Equals(Team.TeamName) && t.EventID.Equals(app.EventID));
 
             if (team1 != null)
             {
@@ -120,6 +131,7 @@ namespace PX_Project_Version_3.Pages
                
                 team.ProjectName = Team.ProjectName;
                 team.Idea = Team.Idea;
+                //We are not going to edit theme here
                 await _context.SaveChangesAsync();
                 return RedirectToPage("AllTeams");
             }

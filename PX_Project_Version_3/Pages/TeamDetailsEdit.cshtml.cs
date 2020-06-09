@@ -25,7 +25,8 @@ namespace PX_Project_Version_3.Pages
         [BindProperty]
         public Team Team { get; set; }
         public IList<Team> AllTeams { get; set; }
-        public string Message { get; set; }
+        public List<SelectListItem> allThemes { get; set; }
+        
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -48,22 +49,30 @@ namespace PX_Project_Version_3.Pages
                 return RedirectToPage("MyTeam");
             }
 
+            allThemes = await _context.Theme.Where(t => t.EventID.Equals(app.EventID)).Select(
+                a => new SelectListItem
+                {
+                    Value = a.ThemeId.ToString(),
+                    Text = a.ThemeName
+                }
+                ).ToListAsync();
+
             return Page();
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
+
+        [BindProperty]
+        public string Message { get; set; }
+
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
+            
             AppCondition app = await _context.AppCondition.FirstOrDefaultAsync(app => app.AppConditionId.Equals(1));
             AllTeams = await _context.Team.Where(t => t.EventID.Equals(app.EventID)).ToListAsync();
 
-           
+            var themeid = Int32.Parse(Request.Form["themeid"]);
 
             //Before we save we need to make sure team name is unique among the team for a specific event
             foreach (var team in AllTeams)
@@ -71,21 +80,58 @@ namespace PX_Project_Version_3.Pages
                 if (team.TeamName.Equals(Team.TeamName))
                 {
                     Message = "Team Name has to be Unique!! Try Again!!";
+                    allThemes = await _context.Theme.Where(t => t.EventID.Equals(app.EventID)).Select(
+                a => new SelectListItem
+                {
+                    Value = a.ThemeId.ToString(),
+                    Text = a.ThemeName
+                }
+                ).ToListAsync();
                     return Page();
+                }
+            }
+
+            //Since the user editted the theme we need to check 
+
+            Team theteam = await _context.Team.FirstOrDefaultAsync(t => t.TeamId.Equals(Team.TeamId) && t.EventID.Equals(app.EventID));
+
+            if (theteam.ThemeID != themeid)
+            {
+                //So that would mean that the team has changed their team theme
+                //Because of that we need to remove all the judges votes for that team
+                IList<Judge> allJudges = await _context.Judge.Where(j => j.EventID.Equals(app.EventID)).ToListAsync();
+
+                //Now that i have the judges need to check who voted for this team
+                foreach (var judge in allJudges)
+                {
+                    //Now we load all the votes made by this judge
+                    IList<Vote> allVotes = await _context.Vote.Where(v => v.UserID.Equals(judge.UserID) && v.EventID.Equals(app.EventID)).ToListAsync();
+
+                    //If a vote is for this team
+                    //We will remove the votes otherwise not
+                    foreach (var vote in allVotes)
+                    {
+                        if (vote.TeamID.Equals(theteam.TeamId))
+                        {
+                            _context.Vote.Remove(vote);
+                            await _context.SaveChangesAsync();
+                        }
+                    }
                 }
             }
 
             if (ModelState.IsValid)
             {
-                Team team = await _context.Team.FirstOrDefaultAsync(t => t.TeamId.Equals(Team.TeamId) && t.EventID.Equals(app.EventID));
-                //We don't allow team name change here as it has to unique
-                team.ProjectName = Team.ProjectName;
-                team.Idea = Team.Idea;
+                theteam.ThemeID = themeid;
+                theteam.ProjectName = Team.ProjectName;
+                theteam.Idea = Team.Idea;
                 await _context.SaveChangesAsync();
+
+
                 return RedirectToPage("MyTeam");
             }
 
-            return RedirectToPage("./MyTeam");
+            return RedirectToPage("MyTeam");
         }
     }
 }

@@ -23,7 +23,10 @@ namespace PX_Project_Version_3.Pages
         [BindProperty]
         public IList<User> Users { get;set; }
         public IList<Judge> Judges { get; set; }
+        public IList<Theme> allThemes { get; set; }
         public string JudgeStatus { get; set; }
+        public string ThemeName { get; set; }
+        public string ThemeType { get; set; }
         //No need to check the user status as admin 
         //as only admin will be able to access this page
 
@@ -38,6 +41,7 @@ namespace PX_Project_Version_3.Pages
                 return RedirectToPage("Privacy");
             }
 
+            allThemes = await _context.Theme.Where(t => t.EventID.Equals(app.EventID)).ToArrayAsync();
             //We just upload those users who are judges within the current event
             //Admin does not need to change the judges from previous events
             Judges = await _context.Judge.Where( j => j.EventID.Equals(app.EventID)).ToListAsync();
@@ -45,6 +49,8 @@ namespace PX_Project_Version_3.Pages
             Users = await _context.User.ToListAsync();
 
             JudgeStatus = "Make-Judge";
+            ThemeName = "Non-Judge";
+            ThemeType = "Non-Judge";
 
             return Page();
         }

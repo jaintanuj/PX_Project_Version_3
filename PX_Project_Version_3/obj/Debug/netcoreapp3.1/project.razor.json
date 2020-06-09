@@ -20541,6 +20541,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\JudgeVoting.cshtml",
+      "TargetPath": "Pages\\JudgeVoting.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\PeopleWinners\\Create.cshtml",
       "TargetPath": "Pages\\PeopleWinners\\Create.cshtml",
       "FileKind": "mvc"
@@ -20548,6 +20553,11 @@
     {
       "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\Themes\\Details.cshtml",
       "TargetPath": "Pages\\Themes\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\AllThemes.cshtml",
+      "TargetPath": "Pages\\AllThemes.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -20568,6 +20578,11 @@
     {
       "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\Voting.cshtml",
       "TargetPath": "Pages\\Voting.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\EventParametersUpdate.cshtml",
+      "TargetPath": "Pages\\EventParametersUpdate.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -20596,6 +20611,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\AllUsers.cshtml",
+      "TargetPath": "Pages\\AllUsers.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\Votes\\Edit.cshtml",
       "TargetPath": "Pages\\Votes\\Edit.cshtml",
       "FileKind": "mvc"
@@ -20608,6 +20628,11 @@
     {
       "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\PeopleWinners\\Edit.cshtml",
       "TargetPath": "Pages\\PeopleWinners\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\AddNewTheme.cshtml",
+      "TargetPath": "Pages\\AddNewTheme.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -20641,6 +20666,16 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\StartNewEvent.cshtml",
+      "TargetPath": "Pages\\StartNewEvent.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\DeleteTheme.cshtml",
+      "TargetPath": "Pages\\DeleteTheme.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\JudgeWinners\\Edit.cshtml",
       "TargetPath": "Pages\\JudgeWinners\\Edit.cshtml",
       "FileKind": "mvc"
@@ -20651,8 +20686,18 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\TeamPresentations\\Create.cshtml",
+      "TargetPath": "Pages\\TeamPresentations\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\Themes\\Create.cshtml",
       "TargetPath": "Pages\\Themes\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\UploadTeamPresentation.cshtml",
+      "TargetPath": "Pages\\UploadTeamPresentation.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -20676,6 +20721,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\TeamPresentations\\Details.cshtml",
+      "TargetPath": "Pages\\TeamPresentations\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\Users\\Index.cshtml",
       "TargetPath": "Pages\\Users\\Index.cshtml",
       "FileKind": "mvc"
@@ -20686,8 +20736,33 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\JudgeThemeVoting.cshtml",
+      "TargetPath": "Pages\\JudgeThemeVoting.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\TeamPresentations\\Edit.cshtml",
+      "TargetPath": "Pages\\TeamPresentations\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\TieBreakers\\Index.cshtml",
       "TargetPath": "Pages\\TieBreakers\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\CreateNewThemeForEvent.cshtml",
+      "TargetPath": "Pages\\CreateNewThemeForEvent.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\AllJudges.cshtml",
+      "TargetPath": "Pages\\AllJudges.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\TeamPresentations\\Delete.cshtml",
+      "TargetPath": "Pages\\TeamPresentations\\Delete.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -20696,8 +20771,18 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\EditTheme.cshtml",
+      "TargetPath": "Pages\\EditTheme.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\MyTeam.cshtml",
       "TargetPath": "Pages\\MyTeam.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\TeamPresentations\\Index.cshtml",
+      "TargetPath": "Pages\\TeamPresentations\\Index.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -20806,6 +20891,16 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\TeamDetails.cshtml",
+      "TargetPath": "Pages\\TeamDetails.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\EditTeamDetails.cshtml",
+      "TargetPath": "Pages\\EditTeamDetails.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\PeopleWinners\\Delete.cshtml",
       "TargetPath": "Pages\\PeopleWinners\\Delete.cshtml",
       "FileKind": "mvc"
@@ -20828,6 +20923,11 @@
     {
       "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\Members\\Delete.cshtml",
       "TargetPath": "Pages\\Members\\Delete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\EditUser.cshtml",
+      "TargetPath": "Pages\\EditUser.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -20881,6 +20981,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\JudgeThemeVotedTeams.cshtml",
+      "TargetPath": "Pages\\JudgeThemeVotedTeams.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\Shared\\_Layout.cshtml",
       "TargetPath": "Pages\\Shared\\_Layout.cshtml",
       "FileKind": "mvc"
@@ -20906,6 +21011,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\DeleteTeamByAdmin.cshtml",
+      "TargetPath": "Pages\\DeleteTeamByAdmin.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\JudgeWinnerList.cshtml",
       "TargetPath": "Pages\\JudgeWinnerList.cshtml",
       "FileKind": "mvc"
@@ -20928,6 +21038,11 @@
     {
       "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\DeleteTeam.cshtml",
       "TargetPath": "Pages\\DeleteTeam.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\AllTeams.cshtml",
+      "TargetPath": "Pages\\AllTeams.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -20963,6 +21078,11 @@
     {
       "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\PeopleWinnerList.cshtml",
       "TargetPath": "Pages\\PeopleWinnerList.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\aarav\\OneDrive\\Desktop\\tanuj\\PX_Project_Version_3\\PX_Project_Version_3\\Pages\\DeleteUser.cshtml",
+      "TargetPath": "Pages\\DeleteUser.cshtml",
       "FileKind": "mvc"
     },
     {
