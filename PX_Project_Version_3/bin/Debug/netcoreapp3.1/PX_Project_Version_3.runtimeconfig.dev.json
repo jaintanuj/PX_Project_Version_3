@@ -1,8 +1,8 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
-      "C:\\Users\\Chamath\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\Chamath\\.nuget\\packages"
+      "C:\\Users\\aarav\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\aarav\\.nuget\\packages"
     ]
   }
 }

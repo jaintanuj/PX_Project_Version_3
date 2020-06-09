@@ -269,3 +269,4 @@ C:\Users\aarav\OneDrive\Desktop\tanuj\PX_Project_Version_3\PX_Project_Version_3\
 C:\Users\aarav\OneDrive\Desktop\tanuj\PX_Project_Version_3\PX_Project_Version_3\obj\Debug\netcoreapp3.1\Razor\Pages\JudgeVoting.cshtml.g.cs
 C:\Users\aarav\OneDrive\Desktop\tanuj\PX_Project_Version_3\PX_Project_Version_3\obj\Debug\netcoreapp3.1\Razor\Pages\JudgeThemeVoting.cshtml.g.cs
 C:\Users\aarav\OneDrive\Desktop\tanuj\PX_Project_Version_3\PX_Project_Version_3\obj\Debug\netcoreapp3.1\Razor\Pages\JudgeThemeVotedTeams.cshtml.g.cs
+C:\Users\aarav\OneDrive\Desktop\tanuj\PX_Project_Version_3\PX_Project_Version_3\obj\Debug\netcoreapp3.1\Razor\Pages\Shared\Components\NavBarComponent\Default.cshtml.g.cs
