@@ -18,5 +18,6 @@ namespace PX_Project_Version_3.Models
         public int UserID { get; set; }
         public int EventID { get; set; }
         public string JoinCode { get; set; }
+        public int ThemeID { get; set; }
     }
 }

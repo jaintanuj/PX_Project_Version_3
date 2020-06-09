@@ -37,11 +37,23 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.EventCode)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EventName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EventName)
+        </dd>
     </dl>
     
     <form method="post">
         <input type="hidden" asp-for="User.UserId" />
-        <input type="submit" value="@Model.buttonStatus" class="btn btn-primary" /> |
+
+        @if (!Model.isJudge)
+        {
+            <select name="themeid" asp-items="Model.allThemes"></select>
+        }
+
+        <input type="submit" value="@Model.buttonStatus" class="btn btn-primary" />
         <a asp-page="./ManageJudges">Back to Judges Management</a>
     </form>
 </div>

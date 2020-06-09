@@ -36,10 +36,12 @@ namespace PX_Project_Version_3.Pages
 
         [BindProperty]
         public Event Event { get; set; }
-        public string Message { get; set; }
+
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
+        public string Message { get; set; }
+
         public async Task<IActionResult> OnPostAsync()
         {
             if (Event.EventCode.Trim() == "")

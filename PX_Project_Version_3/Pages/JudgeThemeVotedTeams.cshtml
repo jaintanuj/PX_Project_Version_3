@@ -1,0 +1,93 @@
+﻿@page
+@model PX_Project_Version_3.Pages.JudgeThemeVotedTeamsModel
+
+@{
+    ViewData["Title"] = "JudgeThemeVotedTeams";
+}
+
+<h1>JudgeThemeVotedTeams</h1>
+
+@*<div>
+    <form method="post" asp-page-handler="view">
+        <select name="themeid" asp-items="Model.allThemes"></select>
+
+        <input type="submit" value="Filter Results">
+    </form>
+</div>*@
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Team[0].TeamName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Team[0].ProjectName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.eventCode)
+            </th>
+            <th>
+                Total-Votes
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Team)
+        {
+
+            foreach (var user in Model.allUsers)
+            {
+                if (item.UserID.Equals(user.UserId))
+                {
+                    Model.UserName = user.UserName;
+                    break;
+                }
+            }
+
+            foreach (var eve in Model.allEvents)
+            {
+                if (item.EventID.Equals(eve.EventId))
+                {
+                    Model.eventCode = eve.EventCode;
+                    break;
+                }
+            }
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TeamName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProjectName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.eventCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserID)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (Model.isAdmin)
+{
+
+    <div>
+        <form method="post">
+            <input type="submit" value="Save Winner">
+        </form>
+    </div>
+
+}

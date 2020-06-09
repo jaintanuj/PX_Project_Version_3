@@ -80,6 +80,9 @@ namespace PX_Project_Version_3.Migrations
                     b.Property<int>("EventID")
                         .HasColumnType("int");
 
+                    b.Property<int>("ThemeID")
+                        .HasColumnType("int");
+
                     b.Property<int>("UserID")
                         .HasColumnType("int");
 
@@ -191,6 +194,9 @@ namespace PX_Project_Version_3.Migrations
                     b.Property<string>("TeamName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ThemeID")
+                        .HasColumnType("int");
 
                     b.Property<int>("UserID")
                         .HasColumnType("int");

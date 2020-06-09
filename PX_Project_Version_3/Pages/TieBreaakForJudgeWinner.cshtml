@@ -54,10 +54,22 @@
                 @Html.DisplayNameFor(model => model.TeamName)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Project)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.UserName)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.EventCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
             </th>
             <th></th>
         </tr>
@@ -67,48 +79,70 @@
         {
 
 
-            foreach (var user in Model.allUsers)
-            {
-                if (item.UserID.Equals(user.UserId))
-                {
-                    Model.UserName = user.UserName;
-                    break;
-                }
-            }
-
-            foreach (var team in Model.allTeams)
-            {
-                if (item.TeamID.Equals(team.TeamId))
-                {
-                    Model.TeamName = team.TeamName;
-                    break;
-                }
-            }
-
-            foreach (var eve in Model.allEvents)
-            {
-                if (item.EventID.Equals(eve.EventId))
-                {
-                    Model.EventCode = eve.EventCode;
-                    break;
-                }
-            }
-            <tr>
-                <td>
-                    @Html.DisplayFor(model => model.TeamName)
-                </td>
-
-                <td>
-                    @Html.DisplayFor(model => model.UserName)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.EventCode)
-                </td>
-                <td>
-                    <a asp-page="./ConfirmJudgeWinner" asp-route-id="@item.TieBreakerId">Winner</a>
-
-                </td>
-            </tr>
+    foreach (var user in Model.allUsers)
+    {
+        if (item.UserID.Equals(user.UserId))
+        {
+            Model.UserName = user.UserName;
+            Model.Email = user.Email;
+            Model.FullName = user.FullName;
+            break;
         }
+        Model.FullName = "Not-Found";
+        Model.Email = "Not-Found";
+        Model.UserName = "Not-Found";
+    }
+
+    foreach (var team in Model.allTeams)
+    {
+        if (item.TeamID.Equals(team.TeamId))
+        {
+            Model.TeamName = team.TeamName;
+            Model.Project = team.ProjectName;
+            break;
+        }
+        Model.TeamName = "Not-Found";
+        Model.Project = "Not-Found";
+    }
+
+    foreach (var eve in Model.allEvents)
+    {
+        if (item.EventID.Equals(eve.EventId))
+        {
+            Model.EventCode = eve.EventCode;
+            Model.EventName = eve.EventName;
+            break;
+        }
+        Model.EventName = "Not-Found";
+        Model.EventCode = "Not-Found";
+    }
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.TeamName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Project)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.EventCode)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.UserName)
+            </td>
+            <td>
+                <a asp-page="./ConfirmJudgeWinner" asp-route-id="@item.TieBreakerId">Winner</a>
+
+            </td>
+        </tr>
+}
     </tbody>
 </table>

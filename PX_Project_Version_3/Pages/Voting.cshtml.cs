@@ -60,6 +60,12 @@ namespace PX_Project_Version_3.Pages
                 Message = "You can vote any team except your own!!";
             }
 
+            //Here we need to make sure if a judge tries to vote for a team
+            //He/she can only vote a team with the same theme in the same event
+
+            bool isJudge = false;
+            
+
 
             Team team = _context.Team.FirstOrDefault(t => t.UserID.Equals(loginUser.UserId) && t.EventID.Equals(app.EventID));
 

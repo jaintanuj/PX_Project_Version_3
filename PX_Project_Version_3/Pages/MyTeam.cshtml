@@ -76,6 +76,18 @@
         <dd class="col-sm-4">
             @Html.DisplayFor(model => model.Team.Idea)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.themeName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.themeName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.themeType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.themeType)
+        </dd>
         @if (Model.isLeader)
         {
             <dt class="col-sm-2">

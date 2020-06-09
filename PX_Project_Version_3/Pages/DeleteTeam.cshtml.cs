@@ -23,6 +23,10 @@ namespace PX_Project_Version_3.Pages
 
         [BindProperty]
         public Team Team { get; set; }
+        public string Email { get; set; }
+        public string Leader { get; set; }
+        public string EventCode { get; set; }
+        public string EventName { get;set; }
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -43,6 +47,28 @@ namespace PX_Project_Version_3.Pages
             {
                 //User is not a leader or team owner
                 return RedirectToPage("MyTeam");
+            }
+
+            User user = await _context.User.FirstOrDefaultAsync(u => u.UserId.Equals(Team.UserID));
+
+            Leader = "not-found";
+            Email = "not-found";
+
+            if (user != null)
+            {
+                Leader = user.FullName;
+                Email = user.Email;
+            }
+
+            Event eve = await _context.Event.FirstOrDefaultAsync(e => e.EventId.Equals(Team.EventID));
+
+            EventCode = "Not-found";
+            EventName = "Not-found";
+
+            if (eve != null)
+            {
+                EventCode = eve.EventCode;
+                EventName = eve.EventName;
             }
 
             return Page();

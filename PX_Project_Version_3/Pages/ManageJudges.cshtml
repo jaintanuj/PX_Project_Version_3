@@ -62,6 +62,8 @@
                 @Html.DisplayNameFor(model => model.Users[0].FullName)
             </th>
             <th>@Html.DisplayNameFor(model => model.JudgeStatus)</th>
+            <th>@Html.DisplayNameFor(model => model.ThemeName)</th>
+            <th>@Html.DisplayNameFor(model => model.ThemeType)</th>
         </tr>
     </thead>
     <tbody>
@@ -69,30 +71,47 @@
         {
             <tr>
 
-                @foreach (var judge in Model.Judges)
+            @foreach (var judge in Model.Judges)
+            {
+
+                Model.ThemeType = "Not-Judge";
+                Model.ThemeName = "Not-Judge";
+                if (judge.UserID.Equals(item.UserId))
                 {
-                    if (judge.UserID.Equals(item.UserId))
+
+                    Model.JudgeStatus = "Remove-Judge";
+                    foreach (var theme in Model.allThemes)
                     {
-                        Model.JudgeStatus = "Remove-Judge";
-                        break;
+                        if (judge.ThemeID.Equals(theme.ThemeId))
+                        {
+                            Model.ThemeName = theme.ThemeName;
+                            Model.ThemeType = theme.ThemeType;
+                            break;
+                        }
+                        Model.ThemeType = "Not-Judge";
+                        Model.ThemeName = "Not-Judge";
                     }
-                    Model.JudgeStatus = "Make-Judge";
+                    break;
                 }
+                Model.JudgeStatus = "Make-Judge";
+            }
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.FullName)
-                </td>
-                <td>
-                    <a asp-page="./ConfirmJudge" asp-route-id="@item.UserId"> @Model.JudgeStatus</a>
-                </td>
-            </tr>
-        }
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                <a asp-page="./ConfirmJudge" asp-route-id="@item.UserId"> @Model.JudgeStatus</a>
+            </td>
+            <td>@Html.DisplayFor(model => model.ThemeName)</td>
+            <td>@Html.DisplayFor(model => model.ThemeType)</td>
+        </tr>
+}
     </tbody>
 </table>

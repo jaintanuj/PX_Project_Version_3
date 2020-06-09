@@ -47,7 +47,8 @@ namespace PX_Project_Version_3.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserID = table.Column<int>(nullable: false),
                     UserName = table.Column<string>(nullable: true),
-                    EventID = table.Column<int>(nullable: false)
+                    EventID = table.Column<int>(nullable: false),
+                    ThemeID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -115,7 +116,8 @@ namespace PX_Project_Version_3.Migrations
                     Idea = table.Column<string>(nullable: true),
                     UserID = table.Column<int>(nullable: false),
                     EventID = table.Column<int>(nullable: false),
-                    JoinCode = table.Column<string>(nullable: true)
+                    JoinCode = table.Column<string>(nullable: true),
+                    ThemeID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

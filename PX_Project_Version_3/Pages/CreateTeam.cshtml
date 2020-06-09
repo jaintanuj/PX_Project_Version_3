@@ -29,6 +29,10 @@
                 <span asp-validation-for="Team.Idea" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label>Select Theme</label>
+                <select name="theme" asp-items="Model.allThemes"></select>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>

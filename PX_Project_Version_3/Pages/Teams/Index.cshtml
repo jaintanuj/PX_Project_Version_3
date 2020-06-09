@@ -31,6 +31,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Team[0].JoinCode)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Team[0].ThemeID)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -54,6 +57,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.JoinCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThemeID)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.TeamId">Edit</a> |

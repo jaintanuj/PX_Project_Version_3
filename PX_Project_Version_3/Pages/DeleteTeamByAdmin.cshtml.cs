@@ -23,7 +23,8 @@ namespace PX_Project_Version_3.Pages
 
         [BindProperty]
         public Team Team { get; set; }
-        public string UserName { get; set; }
+        public string Leader { get; set; }
+        public string FullName { get; set; }
         public string EventCode { get; set; }
         public IList<Event> allEvents { get; set; }
         public IList<User> allUsers { get; set; }
@@ -51,14 +52,16 @@ namespace PX_Project_Version_3.Pages
 
             allEvents = await _context.Event.ToListAsync();
             allUsers = await _context.User.ToListAsync();
-            UserName = "Not-Found";
+            Leader = "Not-Found";
+            FullName = "Not-Found";
             EventCode = "Not-Found";
 
             foreach (var user in allUsers)
             {
                 if (Team.UserID.Equals(user.UserId))
                 {
-                    UserName = user.UserName;
+                    Leader = user.UserName;
+                    FullName = user.FullName;
                     break;
                 }
             }

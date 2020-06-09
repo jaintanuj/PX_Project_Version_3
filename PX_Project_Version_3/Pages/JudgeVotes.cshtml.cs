@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PX_Project_Version_3.Data;
 using PX_Project_Version_3.Models;
@@ -21,6 +22,7 @@ namespace PX_Project_Version_3.Pages
         }
 
         public IList<Team> Team { get;set; }
+        public List<SelectListItem> allThemes { get; set; }
         public IList<User> allUsers { get; set; }
         public IList<Event> allEvents { get; set; }
         public bool isAdmin { get; set; }
@@ -43,6 +45,14 @@ namespace PX_Project_Version_3.Pages
             AppCondition app = await _context.AppCondition.FirstOrDefaultAsync(app => app.AppConditionId.Equals(1));
             //We need to get all the judges for the current event
             IList<Judge> allJudges = await _context.Judge.Where(j => j.EventID.Equals(app.EventID)).ToListAsync();
+
+            allThemes = await _context.Theme.Where(t => t.EventID.Equals(app.EventID)).Select(
+                a => new SelectListItem
+                {
+                    Value = a.ThemeId.ToString(),
+                    Text = a.ThemeName
+                }
+                ).ToListAsync();
 
             Team = await _context.Team.Where(t => t.EventID.Equals(app.EventID)).ToListAsync();
 
@@ -89,6 +99,82 @@ namespace PX_Project_Version_3.Pages
             return Page();
         }
 
+
+        public async Task<IActionResult> OnPostView()
+        {
+            var themeid = Int32.Parse(Request.Form["themeid"]);
+
+            AppCondition app = await _context.AppCondition.FirstOrDefaultAsync(app => app.AppConditionId.Equals(1));
+
+
+            Theme theme = await _context.Theme.FirstOrDefaultAsync(th => th.ThemeId.Equals(themeid));
+
+            if (theme == null)
+            {
+                return RedirectToPage("Privacy");
+            }
+
+            allThemes = await _context.Theme.Where(t => t.EventID.Equals(app.EventID)).Select(
+               a => new SelectListItem
+               {
+                   Value = a.ThemeId.ToString(),
+                   Text = a.ThemeName
+               }
+               ).ToListAsync();
+
+            allEvents = await _context.Event.ToListAsync();
+            allUsers = await _context.User.ToListAsync();
+
+            //We need to get all the judges for the current event
+            IList<Judge> allJudges = await _context.Judge.Where(j => j.EventID.Equals(app.EventID) && j.ThemeID.Equals(themeid)).ToListAsync();
+
+            Team = await _context.Team.Where(t => t.EventID.Equals(app.EventID) && t.ThemeID.Equals(themeid)).ToListAsync();
+
+            foreach (var team in Team)
+            {
+                team.UserID = 0;
+            }
+
+            if (Team.Count() == 0)
+            {
+                //Which means no team has been created for the specific event
+                Message = "Unfortunalty no team has been created for this event!!";
+                return Page();
+            }
+
+            string username = HttpContext.Session.GetString("username");
+
+            if (app.AdminName.Equals(username))
+            {
+                isAdmin = true;
+            }
+            else
+            {
+                isAdmin = false;
+            }
+
+            foreach (var judge in allJudges)
+            {
+                //We need to load all the votes each judge has made 
+                IList<Vote> allVotes = await _context.Vote.Where(v => v.UserID.Equals(judge.UserID) && v.EventID.Equals(app.EventID)).ToListAsync();
+
+                foreach (var vote in allVotes)
+                {
+                    foreach (var team in Team)
+                    {
+                        if (vote.TeamID.Equals(team.TeamId))
+                        {
+                            //So now that we have found the vote for the team
+                            //We wil just increment the vote for each team
+                            team.UserID += 1;
+                        }
+                    }
+                }
+            }
+
+
+            return Page();
+        }
         public async Task<IActionResult> OnPostAsync()
         {
             string username = HttpContext.Session.GetString("username");

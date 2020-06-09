@@ -20,11 +20,15 @@ namespace PX_Project_Version_3.Pages
 
         [BindProperty]
         public User loginUser { get; set; }
+        public string Email { get; set; }
+        public string Voter { get; set; }
+        public string VoteTo { get; set; }
         public Team selectedTeam { get; set; }
         public IList<Vote> userVotes { get; set; }
         public string Message { get; set; }
         public string button { get; set; }
         public string EventCode { get; set; }
+        public string EventName { get; set; }
 
         //Here id is teamid of which user is not a member of 
         public async Task<IActionResult> OnGetAsync(int? id)
@@ -37,9 +41,13 @@ namespace PX_Project_Version_3.Pages
             }
 
             loginUser = await _context.User.FirstOrDefaultAsync(u => u.UserName.Equals(username));
+            Voter = loginUser.FullName;
+            Email = loginUser.Email;
+
             AppCondition app = await _context.AppCondition.FirstOrDefaultAsync(app => app.AppConditionId.Equals(1));
             Event eve = await _context.Event.FirstOrDefaultAsync(e => e.EventId.Equals(app.EventID));
             EventCode = eve.EventCode;
+            EventName = eve.EventName;
 
             if (id == null)
             {
@@ -57,7 +65,7 @@ namespace PX_Project_Version_3.Pages
              userVotes =await _context.Vote.Where(v => v.UserID.Equals(loginUser.UserId) && v.EventID.Equals(app.EventID)).ToListAsync();
 
             //This is when there are no votes that the user has cast so far
-
+            VoteTo = selectedTeam.TeamName;
 
             if (userVotes.Count() == 0)
             {
@@ -88,7 +96,28 @@ namespace PX_Project_Version_3.Pages
                 if (userVotes.Count() >= app.VotesAllowed)
                 {
                     //Limit has been reached
+                    //return RedirectToPage("Voting");
+
+                    //So now that the user has made a vote we need to send him back 
+                    //Based on his identity
+                     username = HttpContext.Session.GetString("username");
+
+                    IList<Judge> allJudges = await _context.Judge.Where(j => j.EventID.Equals(app.EventID)).ToListAsync();
+
+                    User user = await _context.User.FirstOrDefaultAsync(u => u.UserName.Equals(username));
+
+                    foreach (var judge in allJudges)
+                    {
+                        if (judge.UserID.Equals(user.UserId))
+                        {
+                            return RedirectToPage("JudgeVoting");
+                        }
+                    }
+
+                    //Other wise the user is just a normal user
+                    //So we just send him/her back to confirm voting
                     return RedirectToPage("Voting");
+
                 }
             }
 
@@ -143,14 +172,31 @@ namespace PX_Project_Version_3.Pages
                 };
                 _context.Vote.Add(newVote);
                 await _context.SaveChangesAsync();
-                return RedirectToPage("Voting");
+                
+
+
             }
             else{
                 //Then we will have to unvote this team as user has already votes fo4r this team
                 _context.Vote.Remove(vote);
                 await _context.SaveChangesAsync();
-                return RedirectToPage("Voting");
+             }
+
+
+            IList<Judge> allJudges = await _context.Judge.Where(j => j.EventID.Equals(app.EventID)).ToListAsync();
+            //Before we send the user back we need to the voting
+            //We need to perform certain checks for that
+            foreach (var judge in allJudges)
+            {
+                if (judge.UserID.Equals(user.UserId))
+                {
+                    return RedirectToPage("JudgeVoting");
+                }
             }
+
+            //Other wise the user is just a normal user
+            //So we just send him/her back to confirm voting
+            return RedirectToPage("Voting");
         }
     }
 }
