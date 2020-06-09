@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using PX_Project_Version_3.Data;
 using PX_Project_Version_3.Models;
 
@@ -21,15 +23,37 @@ namespace PX_Project_Version_3.Pages.Themes
 
         [BindProperty]
         public Theme Theme { get; set; }
+        public Event Event { get; set; }
+        public bool isAdmin { get; set; }
+
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            string username = HttpContext.Session.GetString("username");
+
+            if (username == null)
+            {
+                return RedirectToPage("/Privacy");
+            }
+
+            AppCondition app = await _context.AppCondition.FirstOrDefaultAsync(app => app.AppConditionId.Equals(1));
+
+            if (username == app.AdminName)
+            {
+                isAdmin = true;
+            }
+            else
+            {
+                isAdmin = false;
+            }
+
             if (id == null)
             {
                 return NotFound();
             }
 
             Theme = await _context.Theme.FirstOrDefaultAsync(m => m.ThemeId == id);
+            Event = await _context.Event.FirstOrDefaultAsync(i => i.EventId.Equals(Theme.EventID));
 
             if (Theme == null)
             {
