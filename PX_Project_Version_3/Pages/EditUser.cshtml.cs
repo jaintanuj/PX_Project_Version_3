@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -27,14 +28,22 @@ namespace PX_Project_Version_3.Pages
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToPage("Privacy");
+            }
+
+            string username = HttpContext.Session.GetString("username");
+            AppCondition app = await _context.AppCondition.FirstOrDefaultAsync(app => app.AppConditionId.Equals(1));
+
+            if(username != app.AdminName)
+            {
+                return RedirectToPage("Privacy");
             }
 
             User = await _context.User.FirstOrDefaultAsync(m => m.UserId == id);
 
             if (User == null)
             {
-                return NotFound();
+                return RedirectToPage("Privacy");
             }
             return Page();
         }
@@ -48,7 +57,11 @@ namespace PX_Project_Version_3.Pages
                 return Page();
             }
 
-            _context.Attach(User).State = EntityState.Modified;
+            User user = await _context.User.FirstOrDefaultAsync(u => u.UserId.Equals(User.UserId));
+
+            user.FullName = User.FullName;
+            user.Email = User.Email;
+            user.Password = User.Password;
 
             try
             {

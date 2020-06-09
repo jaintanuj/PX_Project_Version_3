@@ -117,7 +117,7 @@ namespace PX_Project_Version_3.Pages
             if (ModelState.IsValid)
             {
                 Team team = await _context.Team.FirstOrDefaultAsync(t => t.TeamId.Equals(Team.TeamId) && t.EventID.Equals(app.EventID));
-                team.TeamName = Team.TeamName;
+               
                 team.ProjectName = Team.ProjectName;
                 team.Idea = Team.Idea;
                 await _context.SaveChangesAsync();

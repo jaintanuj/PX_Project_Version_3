@@ -24,6 +24,10 @@ namespace PX_Project_Version_3.Pages
         public IList<Judge> Judge { get;set; }
         public List<SelectListItem> allEvents { get; set; }
         public IList<Event> Events { get; set; }
+        public IList<User> allUsers { get; set; }
+        public string Email { get; set; }
+        public string FullName { get; set; }
+        public string EventName { get; set; }
         public string EventCode { get; set; }
         public bool isAdmin { get; set; }
 
@@ -46,6 +50,8 @@ namespace PX_Project_Version_3.Pages
 
             Events = await _context.Event.ToListAsync();
 
+            allUsers = await _context.User.ToListAsync();
+
             return Page();
         }
 
@@ -59,7 +65,7 @@ namespace PX_Project_Version_3.Pages
             {
                 return RedirectToPage("Privacy");
             }
-
+            allUsers = await _context.User.ToListAsync();
             allEvents = await _context.Event.Select(a => new SelectListItem { 
                 Value = a.EventId.ToString(),
                 Text = a.EventCode

@@ -22,9 +22,17 @@
                 @Html.DisplayNameFor(model => model.Judge[0].UserName)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.EventCode)
             </th>
-            
+            <th>
+                @Html.DisplayNameFor(model => model.EventName)
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -36,18 +44,40 @@
                 if (eve.EventId.Equals(item.EventID))
                 {
                     Model.EventCode = eve.EventCode;
+                    Model.EventName = eve.EventName;
                     break;
                 }
                 Model.EventCode = "Not-Found";
+                Model.EventName = "Not-Found";
+            }
+
+            @foreach (var user in Model.allUsers)
+            {
+                if (user.UserId.Equals(item.UserID))
+                {
+                    Model.Email = user.Email;
+                    Model.FullName = user.FullName;
+                    break;
+                }
+                Model.Email = "Not-Found";
+                Model.FullName = "Not-Found";
             }
 
             <td>
                 @Html.DisplayFor(modelItem => item.UserName)
             </td>
             <td>
+                @Html.DisplayFor(model => model.Email)
+             </td>
+            <td>
+                @Html.DisplayFor(model => model.FullName)
+            </td>
+            <td>
                 @Html.DisplayFor(model => model.EventCode)
             </td>
-            
+            <td>
+                @Html.DisplayFor(model => model.EventName)
+            </td>
         </tr>
 }
     </tbody>

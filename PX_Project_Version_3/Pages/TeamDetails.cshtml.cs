@@ -25,6 +25,7 @@ namespace PX_Project_Version_3.Pages
         public Team Team { get; set; }
         public User leader { get; set; }
         public IList<Member> allMembers { get; set; }
+        public string EventName { get; set; }
         public Event eve { get; set; }
         public string Message { get; set; }
         public string EventCode { get; set; }
@@ -55,7 +56,13 @@ namespace PX_Project_Version_3.Pages
             leader = await _context.User.FirstOrDefaultAsync(u => u.UserId.Equals(Team.UserID));
             allMembers = await _context.Member.Where(m => m.TeamID.Equals(Team.TeamId) && m.EventID.Equals(Team.EventID)).ToListAsync();
             eve = await _context.Event.FirstOrDefaultAsync(eve => eve.EventId.Equals(Team.EventID));
-            EventCode = eve.EventCode;
+            EventCode = "Not-Found";
+            EventName = "Not-Found";
+            if (eve != null)
+            {
+                EventCode = eve.EventCode;
+                EventName = eve.EventName;
+            }
             TeamPresentation teamPresentation = await _context.TeamPresentation.FirstOrDefaultAsync(tp => tp.TeamID.Equals(Team.TeamId));
 
             if (teamPresentation != null)
@@ -94,7 +101,13 @@ namespace PX_Project_Version_3.Pages
             leader = await _context.User.FirstOrDefaultAsync(u => u.UserId.Equals(Team.UserID));
             allMembers = await _context.Member.Where(m => m.TeamID.Equals(Team.TeamId) && m.EventID.Equals(Team.EventID)).ToListAsync();
             eve = await _context.Event.FirstOrDefaultAsync(eve => eve.EventId.Equals(Team.EventID));
-            EventCode = eve.EventCode;
+            EventCode = "Not-Found";
+            EventName = "Not-Found";
+            if (eve != null)
+            {
+                EventCode = eve.EventCode;
+                EventName = eve.EventName;
+            }
 
             if (teamPresentation == null)
             {

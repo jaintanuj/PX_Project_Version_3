@@ -24,6 +24,7 @@ namespace PX_Project_Version_3.Pages
         public User User { get; set; }
         public string EventCode { get; set; }
         public string Message { get; set; }
+        public string EventName { get; set; }
         public string buttonStatus { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
@@ -62,7 +63,8 @@ namespace PX_Project_Version_3.Pages
 
             Event eve = await _context.Event.FirstOrDefaultAsync(eve => eve.EventId.Equals(app.EventID));
             EventCode = eve.EventCode;
-            
+            EventName = eve.EventName;
+
             return Page();
         }
 
@@ -73,6 +75,12 @@ namespace PX_Project_Version_3.Pages
                 //Which shouldn't be the case as only admin can access this page
                 return RedirectToPage("ManageJudges");
             }
+
+            AppCondition app = await _context.AppCondition.FirstOrDefaultAsync(app => app.AppConditionId.Equals(1));
+
+            Event eve = await _context.Event.FirstOrDefaultAsync(eve => eve.EventId.Equals(app.EventID));
+            EventCode = eve.EventCode;
+            EventName = eve.EventName;
 
             //So there are few things to consider before we can assign judges
             //That is to make sure they haven't accidently created teams before they were assigned
@@ -87,7 +95,7 @@ namespace PX_Project_Version_3.Pages
                 return RedirectToPage("ManageJudges");
             }
 
-            AppCondition app = await _context.AppCondition.FirstOrDefaultAsync(app => app.AppConditionId.Equals(1));
+            
 
             //Now we have to check if admin is trying to either remove or add this user to the judges table
 

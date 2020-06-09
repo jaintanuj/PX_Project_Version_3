@@ -20,11 +20,15 @@ namespace PX_Project_Version_3.Pages
 
         [BindProperty]
         public User loginUser { get; set; }
+        public string Email { get; set; }
+        public string Voter { get; set; }
+        public string VoteTo { get; set; }
         public Team selectedTeam { get; set; }
         public IList<Vote> userVotes { get; set; }
         public string Message { get; set; }
         public string button { get; set; }
         public string EventCode { get; set; }
+        public string EventName { get; set; }
 
         //Here id is teamid of which user is not a member of 
         public async Task<IActionResult> OnGetAsync(int? id)
@@ -37,9 +41,13 @@ namespace PX_Project_Version_3.Pages
             }
 
             loginUser = await _context.User.FirstOrDefaultAsync(u => u.UserName.Equals(username));
+            Voter = loginUser.FullName;
+            Email = loginUser.Email;
+
             AppCondition app = await _context.AppCondition.FirstOrDefaultAsync(app => app.AppConditionId.Equals(1));
             Event eve = await _context.Event.FirstOrDefaultAsync(e => e.EventId.Equals(app.EventID));
             EventCode = eve.EventCode;
+            EventName = eve.EventName;
 
             if (id == null)
             {
@@ -57,7 +65,7 @@ namespace PX_Project_Version_3.Pages
              userVotes =await _context.Vote.Where(v => v.UserID.Equals(loginUser.UserId) && v.EventID.Equals(app.EventID)).ToListAsync();
 
             //This is when there are no votes that the user has cast so far
-
+            VoteTo = selectedTeam.TeamName;
 
             if (userVotes.Count() == 0)
             {

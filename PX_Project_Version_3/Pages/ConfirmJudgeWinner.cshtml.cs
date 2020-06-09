@@ -22,9 +22,11 @@ namespace PX_Project_Version_3.Pages
 
         [BindProperty]
         public TieBreaker TieBreaker { get; set; }
-        public string UserName { get; set; }
+        public string Leader { get; set; }
+        public string Email { get; set; }
         public string TeamName { get; set; }
         public string EventCode { get; set; }
+        public string EventName { get; set; }
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -56,9 +58,11 @@ namespace PX_Project_Version_3.Pages
                 return RedirectToPage("JudgeVotes");
             }
 
-            UserName = user.UserName;
+            Leader = user.FullName;
+            Email = user.Email;
             TeamName = team.TeamName;
             EventCode = eve.EventCode;
+            EventName = eve.EventName;
 
             return Page();
         }

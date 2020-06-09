@@ -25,8 +25,14 @@ namespace PX_Project_Version_3.Pages
         public string UserName { get; set; }
         public IList<Team> allTeams { get; set; }
         public string TeamName { get; set; }
+        public string Leader { get; set; }
+        public string Email { get; set; }
         public IList<Event> allEvents { get; set; }
         public string EventCode { get; set; }
+        public string EventName { get; set; }
+        public string Project { get; set; }
+        public string FullName { get; set; }
+        
 
         public async Task<IActionResult> OnGetAsync()
         {
