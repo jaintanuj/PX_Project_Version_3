@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace PX_Project_Version_3.Pages.Shared
 {
-    public class NavBarController : Controller
+    public class DefaultModel : PageModel
     {
-        public IActionResult Index()
+        public void OnGet()
         {
-            return View();
+
         }
     }
 }
