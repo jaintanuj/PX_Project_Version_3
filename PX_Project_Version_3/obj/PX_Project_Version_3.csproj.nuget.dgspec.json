@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Chamath\\Source\\Repos\\PX_Project_Version_3\\PX_Project_Version_3\\PX_Project_Version_3.csproj": {}
+    "C:\\Users\\Chamath\\source\\repos\\PX_Project_Version_3\\PX_Project_Version_3\\PX_Project_Version_3.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Chamath\\Source\\Repos\\PX_Project_Version_3\\PX_Project_Version_3\\PX_Project_Version_3.csproj": {
+    "C:\\Users\\Chamath\\source\\repos\\PX_Project_Version_3\\PX_Project_Version_3\\PX_Project_Version_3.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Chamath\\Source\\Repos\\PX_Project_Version_3\\PX_Project_Version_3\\PX_Project_Version_3.csproj",
+        "projectUniqueName": "C:\\Users\\Chamath\\source\\repos\\PX_Project_Version_3\\PX_Project_Version_3\\PX_Project_Version_3.csproj",
         "projectName": "PX_Project_Version_3",
-        "projectPath": "C:\\Users\\Chamath\\Source\\Repos\\PX_Project_Version_3\\PX_Project_Version_3\\PX_Project_Version_3.csproj",
+        "projectPath": "C:\\Users\\Chamath\\source\\repos\\PX_Project_Version_3\\PX_Project_Version_3\\PX_Project_Version_3.csproj",
         "packagesPath": "C:\\Users\\Chamath\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Chamath\\Source\\Repos\\PX_Project_Version_3\\PX_Project_Version_3\\obj\\",
+        "outputPath": "C:\\Users\\Chamath\\source\\repos\\PX_Project_Version_3\\PX_Project_Version_3\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Chamath\\AppData\\Roaming\\NuGet\\NuGet.Config",
