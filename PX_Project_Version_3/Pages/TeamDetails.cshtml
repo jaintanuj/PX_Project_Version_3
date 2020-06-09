@@ -9,36 +9,36 @@
 
 <h4>@Model.Message</h4>
 
-<div>
-    <a asp-page="./AllTeams">All Teams</a>
+<div class="banner">
+    <img src="~/lib/images/InfoTrackTeamDetails.png"
+         style="width:75%">
 </div>
 
 <div>
-    <h4>Team</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Team.TeamName)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-4">
             @Html.DisplayFor(model => model.Team.TeamName)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Team.ProjectName)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-4">
             @Html.DisplayFor(model => model.Team.ProjectName)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Team.Idea)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-4">
             @Html.DisplayFor(model => model.Team.Idea)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.EventCode)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-4">
             @Html.DisplayFor(model => model.EventCode)
         </dd>
         <dt class="col-sm-2">
@@ -57,19 +57,19 @@
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.leader.UserName)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-4">
             @Html.DisplayFor(model => model.leader.UserName)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.leader.FullName)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-4">
             @Html.DisplayFor(model => model.leader.FullName)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.leader.Email)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-4">
             @Html.DisplayFor(model => model.leader.Email)
         </dd>
     </dl>

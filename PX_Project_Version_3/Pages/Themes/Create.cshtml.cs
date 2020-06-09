@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PX_Project_Version_3.Data;
 using PX_Project_Version_3.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace PX_Project_Version_3.Pages.Themes
 {
@@ -19,9 +21,27 @@ namespace PX_Project_Version_3.Pages.Themes
             _context = context;
         }
 
-        public IActionResult OnGet()
+        // Grabbing list of events that exists
+        public List<Event> EventsList { get; set; }
+        public bool isAdmin { get; set; }
+        public string Message { get; set; }
+
+        public async Task OnGetAsync()
         {
-            return Page();
+            string username = HttpContext.Session.GetString("username");
+
+            AppCondition app = await _context.AppCondition.FirstOrDefaultAsync(app => app.AppConditionId.Equals(1));
+
+            if (username == app.AdminName)
+            {
+                isAdmin = true;
+            }
+            else
+            {
+                isAdmin = false;
+            }
+
+            EventsList = await _context.Event.ToListAsync();
         }
 
         [BindProperty]
@@ -31,11 +51,24 @@ namespace PX_Project_Version_3.Pages.Themes
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            string username = HttpContext.Session.GetString("username");
+
+            AppCondition app = await _context.AppCondition.FirstOrDefaultAsync(app => app.AppConditionId.Equals(1));
+
+            if (username == app.AdminName)
             {
-                return Page();
+                isAdmin = true;
+            }
+            else
+            {
+                isAdmin = false;
             }
 
+            if (!ModelState.IsValid)
+            {
+                EventsList = await _context.Event.ToListAsync();
+                return Page();
+            }
             _context.Theme.Add(Theme);
             await _context.SaveChangesAsync();
 

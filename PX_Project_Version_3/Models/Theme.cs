@@ -10,10 +10,10 @@ namespace PX_Project_Version_3.Models
     {
         [Key]
         public int ThemeId { get; set; }
+        [Required(ErrorMessage = "A Theme Name is required"), MaxLength(50)]
         public string ThemeName { get; set; }
-        public string ThemeType { get; set; }
+        [Required(ErrorMessage = "A linked event is required")]
         public int EventID { get; set; }
-        public string EventName { get; set; }
-        public string EventCode { get; set; }
+        public string description { get; set; }
     }
 }

@@ -2,59 +2,99 @@
 @model PX_Project_Version_3.Pages.Themes.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Themes List";
 }
 
-<h1>Index</h1>
+<h1>Themes List</h1>
+
+<!-- Overriding Datatables classes -->
+<style>
+    .searchBox > div {
+        float: none;
+    }
+
+    .dataTables_wrapper .searchBox .dataTables_filter {
+        float: left
+    }
+</style>
+
+
+
+<head>
+    <link rel="stylesheet" href="~/css/master.css">
+    <!-- DataTables CSS and JS-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+    <script src="~/js/jquery-3.5.1.js"></script>
+    <script src="~/js/jquery.dataTables.min.js"></script>
+    <script src="~/js/dataTables.editor.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#table').DataTable({
+                dom: '<"searchBox"f>t',
+                responsive: true,
+                columnDefs: [
+                    { responsivePriority: 1 },
+                    { responsivePriority: 2 }
+                ]
+            });
+        });
+    </script>
+</head>
+
 
 <p>
-    <a asp-page="Create">Create New</a>
+    @Model.Message
 </p>
-<table class="table">
+
+
+
+@if (Model.isAdmin)
+{
+    <p>
+        <a asp-page="./Create" class="btn btn-primary">Create a New Theme</a>
+    </p>
+}
+<br />
+<div>
+    <div>
+        <form method="post">
+            <select name="eventid" asp-items="Model.eventList"></select>
+            <input type="submit" class="btn btn-primary" value="Filter Results">
+        </form>
+    </div>
+</div>
+<br />
+<table class="table" id="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Theme[0].ThemeName)
+                Theme Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Theme[0].ThemeType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Theme[0].EventID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Theme[0].EventName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Theme[0].EventCode)
+                Description
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Theme) {
+        @foreach (var item in Model.Theme)
+        {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.ThemeName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ThemeType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EventID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EventName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EventCode)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ThemeId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ThemeId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ThemeId">Delete</a>
-            </td>
-        </tr>
-}
+            </td>        
+
+            @if (Model.isAdmin)
+            {
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.ThemeId">Edit</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ThemeId">Delete</a>
+                </td>
+            }
+            </tr>
+        }
     </tbody>
 </table>

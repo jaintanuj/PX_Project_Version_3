@@ -2,53 +2,56 @@
 @model PX_Project_Version_3.Pages.Themes.CreateModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create a New Theme";
 }
 
-<h1>Create</h1>
+@if (Model.isAdmin)
+{
 
-<h4>Theme</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Theme.ThemeName" class="control-label"></label>
-                <input asp-for="Theme.ThemeName" class="form-control" />
-                <span asp-validation-for="Theme.ThemeName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Theme.ThemeType" class="control-label"></label>
-                <input asp-for="Theme.ThemeType" class="form-control" />
-                <span asp-validation-for="Theme.ThemeType" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Theme.EventID" class="control-label"></label>
-                <input asp-for="Theme.EventID" class="form-control" />
-                <span asp-validation-for="Theme.EventID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Theme.EventName" class="control-label"></label>
-                <input asp-for="Theme.EventName" class="form-control" />
-                <span asp-validation-for="Theme.EventName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Theme.EventCode" class="control-label"></label>
-                <input asp-for="Theme.EventCode" class="form-control" />
-                <span asp-validation-for="Theme.EventCode" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+    <p>
+        @Model.Message
+    </p>
+
+
+    <h4>Create a New Theme</h4>
+    <hr />
+    <strong>Inputs marked with <span style="color: red;">*</span> are required</strong>
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Theme.ThemeName" class="control-label">Theme Name</label>
+                    <input asp-for="Theme.ThemeName" class="form-control" />
+                    <span asp-validation-for="Theme.ThemeName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Theme.description" class="control-label">Description</label>
+                    <input asp-for="Theme.description" class="form-control" />
+                    <span asp-validation-for="Theme.description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Theme.EventID" class="control-label">Event Code</label>
+                    <select asp-for="Theme.EventID" class="form-control">
+                        @foreach (var events in Model.EventsList)
+                        {
+                            <option value="@events.EventId">@events.EventCode</option>
+                        }
+                    </select>
+                    <span asp-validation-for="Theme.EventID" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <div>
+        <a asp-page="Index" class="btn btn-primary">Back to List</a>
+    </div>
+}
+@if (!Model.isAdmin)
+{
+    <p style="color:red">You are not authorised to view this page.</p>
 }

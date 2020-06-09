@@ -79,7 +79,7 @@ namespace PX_Project_Version_3.Pages
                 if (vote.TeamID.Equals(selectedTeam.TeamId))
                 {
                     //This would mean that the user has already voted for this team
-                    Message = "Are you sure you wish to unovte?";
+                    Message = "Are you sure you wish to unvote?";
                     button = "Unvote";
                     return Page() ;
                 }
@@ -134,7 +134,7 @@ namespace PX_Project_Version_3.Pages
             string username = HttpContext.Session.GetString("username");
             AppCondition app = await _context.AppCondition.FirstOrDefaultAsync(app => app.AppConditionId.Equals(1));
 
-            //Now we have to check wether to vote or unovte
+            //Now we have to check wether to vote or unvote
             //We will vote if a user hasn't vote for that team yet
 
             //IList<Vote> allUserVotes = await _context.Vote.Where(v => v.UserName.Equals(username) && v.EventID.Equals(app.EventID)).ToListAsync();
